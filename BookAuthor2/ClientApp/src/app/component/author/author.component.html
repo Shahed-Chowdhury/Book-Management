@@ -1,0 +1,19 @@
+<h1 class="text-center">Authors</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Info</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of authors.data">
+            <td>{{a.name}}</td>
+            <td><a href=""><fa-icon [icon]="faInfo"></fa-icon></a></td>
+            <td><a href=""><fa-icon [icon]="faPenNib"></fa-icon></a></td>
+            <td><a href=""><fa-icon [icon]="faCross"></fa-icon></a></td>
+        </tr>
+    </tbody>
+</table>

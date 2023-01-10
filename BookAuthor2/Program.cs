@@ -12,6 +12,9 @@ builder.Services.AddDbContext<BookAndAuthorContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("connectDB"))
 );
 
+//services cors
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,6 +27,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+
+app.UseCors(
+  options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader()
+);
 
 
 app.MapControllerRoute(

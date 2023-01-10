@@ -9,6 +9,7 @@ import { AuthorComponent } from './component/author/author.component';
 import { BookComponent } from './component/book/book.component';
 import { HomeComponent } from './component/home/home.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
       {path: 'authors', component: AuthorComponent },
       {path: 'books', component: BookComponent},
     ]),
+    FontAwesomeModule,
     
   ],
   providers: [],
