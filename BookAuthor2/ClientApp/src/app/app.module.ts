@@ -22,6 +22,7 @@ import { HomeComponent } from './component/home/home.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      {path: '', component: HomeComponent},
       {path: 'authors', component: AuthorComponent },
       {path: 'books', component: BookComponent},
     ]),

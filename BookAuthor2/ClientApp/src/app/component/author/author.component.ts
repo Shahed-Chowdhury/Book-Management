@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IAuthor } from 'src/app/Interfaces/IAuthor';
-import { Authors } from 'src/app/mock-data';
 
 @Component({
   selector: 'app-author',
@@ -8,8 +6,6 @@ import { Authors } from 'src/app/mock-data';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
-
-  Authors: IAuthor[] = Authors
 
   constructor() { }
 
