@@ -15,7 +15,8 @@ export class ApiService {
     });
   }
 
-  getAuthors(){ return this.httpclient.get(`${this.Api_URL}/author`)
-}
+  getAuthors(){ return this.httpclient.get(`${this.Api_URL}/author`)}
+
+  getAuthorsById(id: Number) {return this.httpclient.get(`${this.Api_URL}/author/${id}`)}
 
 }
