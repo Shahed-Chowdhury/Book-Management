@@ -1,0 +1,14 @@
+<body class="container">
+ <h1 class="text-center p-3">Book and Author</h1>
+ <div class="row">
+    <div class="col-lg-6">
+        <a routerLink="authors" class="btn btn-primary w-100 p-3" (click)="hmm('haha')">View author details</a>
+    </div>
+    <div class="col-lg-6">
+        <a routerLink="books" class="btn btn-secondary w-100 p-3" (click)="hmm('hehe')">View book details</a>
+    </div>
+ </div>
+ <div class="container component">
+    <router-outlet></router-outlet>
+ </div>
+</body>
