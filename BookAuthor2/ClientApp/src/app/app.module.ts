@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AuthorComponent } from './component/author/author.component';
 import { BookComponent } from './component/book/book.component';
 import { HomeComponent } from './component/home/home.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HomeComponent } from './component/home/home.component';
     AuthorComponent,
     BookComponent,
     HomeComponent,
+    NavbarComponent,
   ],
 
   imports: [
@@ -22,7 +24,7 @@ import { HomeComponent } from './component/home/home.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: '', component: HomeComponent},
+      {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'authors', component: AuthorComponent },
       {path: 'books', component: BookComponent},
     ]),
