@@ -14,6 +14,7 @@ import { AuthorDetailComponent } from './component/author/detail/detail.componen
 import { EditComponent as AuthorEditComponent } from './component/author/edit/edit.component';
 import { DeleteComponent as AuthorDeleteComponent } from './component/author/delete/delete.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { AddComponent as AuthorAddComponent } from './component/author/add/add.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
     AuthorEditComponent,
     AuthorDeleteComponent,
     PageNotFoundComponent,
+    AuthorAddComponent,
   ],
 
   imports: [
@@ -34,10 +36,12 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
+      {path: 'author/add', component: AuthorAddComponent},
       {path: 'authors', component: AuthorComponent },
-      {path: 'books', component: BookComponent},
       {path: 'author/details/:id', component: AuthorDetailComponent},
       {path: 'author/edit/:id', component: AuthorEditComponent},
+      {path: 'author/delete/:id', component: AuthorDeleteComponent},
+      {path: 'books', component: BookComponent},
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
     ]),
     FontAwesomeModule,

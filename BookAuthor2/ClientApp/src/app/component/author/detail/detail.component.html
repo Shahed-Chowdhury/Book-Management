@@ -5,7 +5,7 @@
             <a [routerLink]="['/author/edit', authorId]" class="btn btn-primary w-100 p-3">Edit Author</a>
         </div>
         <div class="col-lg-6">
-            <a href="" class="btn btn-secondary w-100 p-3">Delete Author</a> 
+            <a [routerLink]="['/author/delete', authorId]" class="btn btn-secondary w-100 p-3">Delete Author</a> 
         </div>
     </div>
     <h3 class="p-3 text-center">Published books</h3> 
@@ -25,6 +25,6 @@
             </tr>
         </tbody>
     </table>
-</div>o
+</div>
 
 

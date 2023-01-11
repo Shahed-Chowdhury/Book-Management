@@ -1,1 +1,16 @@
-<p>edit works!</p>
+<!-- <p>{{author.data.name}}</p> -->
+<div class="container d-flex align-items-center justify-content-center min-vh-50">
+    <div>
+        <h1 class="p-5">Edit Author</h1>
+        <form>
+            <div class="name">
+                <label for="Name">Name:</label>&nbsp;
+                <input type="text" name="Name" id="AuthorName" class="p-2" [value]="author.data.name">   
+            </div> 
+            <div class="button">
+                <br>
+                <button (click)="EditAuthor()" class="btn btn-primary w-100">Edit Author</button>
+            </div>
+        </form>
+    </div>
+</div>
