@@ -11,9 +11,9 @@
     <tbody>
         <tr *ngFor="let a of authors.data">
             <td>{{a.name}}</td>
-            <td><a href=""><fa-icon [icon]="faInfo"></fa-icon></a></td>
-            <td><a href=""><fa-icon [icon]="faPenNib"></fa-icon></a></td>
-            <td><a href=""><fa-icon [icon]="faCross"></fa-icon></a></td>
+            <td><a [routerLink]="['/author/details/', a.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+            <td><a [routerLink]=""><fa-icon [icon]="faPenNib"></fa-icon></a></td>
+            <td><a [routerLink]=""><fa-icon [icon]="faCross"></fa-icon></a></td>
         </tr>
     </tbody>
 </table>

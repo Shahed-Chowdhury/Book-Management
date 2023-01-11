@@ -23,11 +23,8 @@ export class AuthorComponent implements OnInit {
 
     public getAllAuthors()
     {
-        this.apiservice.getAuthors().subscribe(result=>{ 
-        this.authors=result; 
-    })
+        this.apiservice.getAuthors().subscribe(result=>this.authors=result)
+    }
 
-    // Need adding....
-
-  }
+   
 }

@@ -17,6 +17,6 @@ export class ApiService {
 
   getAuthors(){ return this.httpclient.get(`${this.Api_URL}/author`)}
 
-  getAuthorsById(id: Number) {return this.httpclient.get(`${this.Api_URL}/author/${id}`)}
+  getAuthorsDetailsWithBooks(id: Number) {return this.httpclient.get(`${this.Api_URL}/author/getbooks/${id}`)}
 
 }

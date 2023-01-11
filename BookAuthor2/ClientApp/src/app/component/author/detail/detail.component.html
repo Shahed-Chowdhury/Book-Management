@@ -1,0 +1,30 @@
+<div class="container">
+    <h1 class="p-5 text-center">{{author.data.name}}</h1>  
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <a [routerLink]="['/author/edit', authorId]" class="btn btn-primary w-100 p-3">Edit Author</a>
+        </div>
+        <div class="col-lg-6">
+            <a href="" class="btn btn-secondary w-100 p-3">Delete Author</a> 
+        </div>
+    </div>
+    <h3 class="p-3 text-center">Published books</h3> 
+    <table class="table mb-5">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Genre</td>
+                <td>Details</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let items of author.data.books">
+                <td>{{items.title}}</td>
+                <td>{{genre[items.type]}}</td>
+                <td><a [routerLink]="['/author/edit', items.Id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>o
+
+
