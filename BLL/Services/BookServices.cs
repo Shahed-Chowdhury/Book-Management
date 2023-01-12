@@ -48,19 +48,19 @@ namespace BLL.Services
 
         }
 
-        public static BookDTO2 Get(int id)
+        public static BookDTO5 Get(int id)
         {
 
             var book = DataAccessFactory.BookDataAccess().Get(id);
 
              var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Book, BookDTO2>();
+                cfg.CreateMap<Book, BookDTO5>();
                 cfg.CreateMap<Author, AuthorDTO2>();
             }); 
 
             var mapper = new Mapper(config);
 
-            return mapper.Map<BookDTO2>(book); 
+            return mapper.Map<BookDTO5>(book); 
           
         }
 

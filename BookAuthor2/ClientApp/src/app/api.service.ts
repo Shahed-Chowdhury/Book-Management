@@ -27,4 +27,12 @@ export class ApiService {
 
   deleteAuthor(id: Number) {return this.httpclient.delete(`${this.Api_URL}/author/${id}`)}
 
+  getAllBooks() {return this.httpclient.get(`${this.Api_URL}/book`)}
+
+  addBook(data: any) {return this.httpclient.post(`${this.Api_URL}/book/add`, data, {headers: this.headers})} 
+
+  getBookById(id: Number) {return this.httpclient.get(`${this.Api_URL}/book/${id}`)}
+
+  deleteBook(id: Number) { return this.httpclient.delete(`${this.Api_URL}/book/${id}`)}
+
 }

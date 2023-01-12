@@ -68,4 +68,22 @@ namespace BLL.DTOs
         public int AuthorId { get; set; }
 
     }
+
+    public class BookDTO5
+    {
+        [Required]
+        public string Title { get; set; }
+
+        [Required, EnumDataType(typeof(BookType))]
+        public BookType Type { get; set; }
+
+        [Required, StringLength(50)]
+        public DateTime PublishedDate { get; set; }
+
+        [Required]
+        public int AuthorId { get; set; }
+
+        public AuthorDTO2? Author { get; set; }
+
+    }
 }

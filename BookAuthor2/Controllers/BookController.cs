@@ -54,7 +54,8 @@ namespace BookAuthor2.Controllers
         {
             try
             {
-                return NoContent();
+               BookServices.Delete(id);
+               return NoContent();
             }
             catch(Exception ex)
             {

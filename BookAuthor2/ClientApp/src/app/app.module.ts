@@ -15,6 +15,10 @@ import { EditComponent as AuthorEditComponent } from './component/author/edit/ed
 import { DeleteComponent as AuthorDeleteComponent } from './component/author/delete/delete.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AddComponent as AuthorAddComponent } from './component/author/add/add.component';
+import { AddComponent as BookAddComponent } from './component/book/add/add.component';
+import { EditComponent as BookEditComponent } from './component/book/edit/edit.component';
+import { DeleteComponent as BookDeleteComponent } from './component/book/delete/delete.component';
+import { DetailsComponent as BookDetailsComponent } from './component/book/details/details.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { AddComponent as AuthorAddComponent } from './component/author/add/add.c
     AuthorDeleteComponent,
     PageNotFoundComponent,
     AuthorAddComponent,
+    BookAddComponent,
+    BookEditComponent,
+    BookDeleteComponent,
+    BookDetailsComponent,
   ],
 
   imports: [
@@ -42,6 +50,9 @@ import { AddComponent as AuthorAddComponent } from './component/author/add/add.c
       {path: 'author/edit/:id', component: AuthorEditComponent},
       {path: 'author/delete/:id', component: AuthorDeleteComponent},
       {path: 'books', component: BookComponent},
+      {path: 'book/add', component: BookAddComponent},
+      {path: 'book/details/:id', component: BookDetailsComponent},
+      {path: 'book/delete/:id', component: BookDeleteComponent},
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
     ]),
     FontAwesomeModule,

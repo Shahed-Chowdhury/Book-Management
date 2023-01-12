@@ -45,6 +45,7 @@ namespace DAL.Repos
                 Id = n.Id,
                 AuthorId = n.AuthorId,
                 Title = n.Title,
+                Type = n.Type,
                 PublishedDate = n.PublishedDate,
                 Author = n.Author
             }).ToList();
@@ -59,6 +60,7 @@ namespace DAL.Repos
                Id = n.Id,
                AuthorId = n.AuthorId,
                Title = n.Title,
+               Type = n.Type,
                PublishedDate = n.PublishedDate,
                Author = n.Author
             }).FirstOrDefault(p => p.Id == id);

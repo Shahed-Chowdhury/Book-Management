@@ -1,0 +1,27 @@
+<div class="container d-flex align-items-center justify-content-center min-vh-50">
+    <div>
+        <h1 class="p-5">Add Book</h1>
+        <form>
+            <div class="name">
+                <label for="Name">Title:</label>&nbsp;
+                <input type="text" name="Name" id="BookName" class="p-2 w-100">
+            </div> <br>
+            <div class="type">
+                <label for="Name">Type:</label>&nbsp;
+                <select name="" id="selectGenre" class="w-100">
+                    <option *ngFor="let type of genre; let indexof = index" value="{{indexof}}">{{type}}</option>
+                </select> 
+            </div> <br>
+            <div class="author">
+                <label for="author">Author:</label>&nbsp;
+                <select name="" id="selectAuthor" class="w-100">
+                    <option *ngFor="let author of authors.data" value="{{author.id}}">{{author.name}}</option>
+                </select> 
+            </div> 
+            <div class="button">
+                <br>
+                <button class="btn btn-primary w-100" (click)="addBook()">Add Book</button>
+            </div>
+        </form>
+    </div>
+</div>
