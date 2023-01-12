@@ -53,6 +53,7 @@ import { DetailsComponent as BookDetailsComponent } from './component/book/detai
       {path: 'book/add', component: BookAddComponent},
       {path: 'book/details/:id', component: BookDetailsComponent},
       {path: 'book/delete/:id', component: BookDeleteComponent},
+      {path: 'book/edit/:id', component: BookEditComponent},
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
     ]),
     FontAwesomeModule,

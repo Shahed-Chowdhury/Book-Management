@@ -35,4 +35,6 @@ export class ApiService {
 
   deleteBook(id: Number) { return this.httpclient.delete(`${this.Api_URL}/book/${id}`)}
 
+  editBook(data: any) {return this.httpclient.patch(`${this.Api_URL}/book`, data, {headers: this.headers})}
+
 }

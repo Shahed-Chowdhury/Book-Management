@@ -68,10 +68,6 @@ namespace BookAuthor2.Controllers
         {
             try
             {
-                var data = BookServices.Update(dto);
-
-                if (data == null) return BadRequest();
-
                 return Ok(new {status="success", data=BookServices.Update(dto)});
             }
             catch(Exception ex)
