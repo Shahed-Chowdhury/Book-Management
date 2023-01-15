@@ -11,7 +11,7 @@ namespace DAL
             return new PublisherRepo();
         }
 
-        public static IAuthor PublisherDataAccessV2()
+        public static IPublisher PublisherDataAccessV2()
         {
             return new PublisherRepo();
         }
@@ -19,6 +19,11 @@ namespace DAL
         public static IRepo<Book> BookDataAccess()
         {
             return new BookRepo();
+        }
+
+        public static IRepo<Author> AuthorDataAccess()
+        {
+            return new AuthorRepo();
         }
     }
 }

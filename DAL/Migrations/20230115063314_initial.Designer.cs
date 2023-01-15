@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(BookAndAuthorContext))]
-    [Migration("20230115053231_updatedForeignKeyAuthorToPublisher")]
-    partial class updatedForeignKeyAuthorToPublisher
+    [DbContext(typeof(BookManagementContext))]
+    [Migration("20230115063314_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,31 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Author");
+                });
 
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
@@ -73,6 +98,17 @@ namespace DAL.Migrations
                     b.ToTable("Publishers");
                 });
 
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.HasOne("DAL.EF.Models.Book", "Book")
+                        .WithMany("Authors")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.HasOne("DAL.EF.Models.Publisher", "Publisher")
@@ -82,6 +118,11 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("DAL.EF.Models.Book", b =>
+                {
+                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("DAL.EF.Models.Publisher", b =>

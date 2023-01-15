@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.DataContext
 {
-    public class DatabaseContextFactory : IDesignTimeDbContextFactory<BookAndAuthorContext>
+    public class DatabaseContextFactory : IDesignTimeDbContextFactory<BookManagementContext>
     {
-        public BookAndAuthorContext CreateDbContext(string[] args)
+        public BookManagementContext CreateDbContext(string[] args)
         {
             AppConfiguration appConfiguration = new AppConfiguration();
-            var opsBuilder = new DbContextOptionsBuilder<BookAndAuthorContext>();
+            var opsBuilder = new DbContextOptionsBuilder<BookManagementContext>();
             opsBuilder.UseSqlServer(appConfiguration.sqlConnectionString);
-            return new BookAndAuthorContext(opsBuilder.Options);
+            return new BookManagementContext(opsBuilder.Options);
         }
     }
 }

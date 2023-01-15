@@ -11,9 +11,7 @@ namespace BLL.DTOs
 {
     public class BookDTO
     {
-        //[Required]
-        //public int Id { get; set; }
-
+        
         [Required]
         public string Title { get; set; }
 
@@ -21,9 +19,15 @@ namespace BLL.DTOs
         public BookType Type { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string Description { get; set; }
 
-         public AuthorDTO? Author { get; set; }
+        [Required]
+        public decimal Price { get; set; } = 0;
+
+        [Required]
+        public int PublisherId { get; set; }
+
+        public PublisherDTO? Author { get; set; }
 
     }
 
@@ -37,7 +41,9 @@ namespace BLL.DTOs
         [Required, EnumDataType(typeof(BookType))]
         public BookType Type { get; set; }
 
-        public AuthorDTO2? Author { get; set; }
+        public PublisherDTO2? Publisher { get; set; }
+
+        public ICollection<AuthorDTO2> Authors { get; set; }
 
     }
 
@@ -65,7 +71,13 @@ namespace BLL.DTOs
         public BookType Type { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        public decimal Price { get; set; } = 0;
+
+        [Required]
+        public int PublisherId { get; set; }
 
     }
 
@@ -80,10 +92,7 @@ namespace BLL.DTOs
         [Required, StringLength(50)]
         public DateTime PublishedDate { get; set; }
 
-        [Required]
-        public int AuthorId { get; set; }
-
-        public AuthorDTO2? Author { get; set; }
+        public PublisherDTO2? Publisher { get; set; }
 
     }
 }

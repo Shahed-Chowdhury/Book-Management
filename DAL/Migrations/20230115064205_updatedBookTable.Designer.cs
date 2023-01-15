@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(BookAndAuthorContext))]
-    [Migration("20230115052452_renamedAuthorToPublisher")]
-    partial class renamedAuthorToPublisher
+    [DbContext(typeof(BookManagementContext))]
+    [Migration("20230115064205_updatedBookTable")]
+    partial class updatedBookTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,31 @@ namespace DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Author");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -33,12 +58,19 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("PublishedDate")
                         .HasMaxLength(50)
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("PublisherId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -50,7 +82,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("Books");
                 });
@@ -73,15 +105,31 @@ namespace DAL.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("DAL.EF.Models.Book", b =>
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
                 {
-                    b.HasOne("DAL.EF.Models.Publisher", "Author")
-                        .WithMany("Books")
-                        .HasForeignKey("AuthorId")
+                    b.HasOne("DAL.EF.Models.Book", "Book")
+                        .WithMany("Authors")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("DAL.EF.Models.Book", b =>
+                {
+                    b.HasOne("DAL.EF.Models.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("DAL.EF.Models.Book", b =>
+                {
+                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("DAL.EF.Models.Publisher", b =>

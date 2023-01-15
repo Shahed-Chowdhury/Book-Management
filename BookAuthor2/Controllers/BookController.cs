@@ -54,12 +54,15 @@ namespace BookAuthor2.Controllers
         {
             try
             {
-               BookServices.Delete(id);
-               return NoContent();
+              var bookDTO = BookServices.Delete(id);
+
+                if(bookDTO != null) return NoContent();
+
+                throw new Exception("Unable to delete book");
             }
             catch(Exception ex)
             {
-                return StatusCode(500);
+                return BadRequest(new {status="Failed", message=ex.Message});
             }
         }
 

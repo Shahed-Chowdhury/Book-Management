@@ -9,11 +9,11 @@ namespace DAL.Repos
 {
     internal class Repo
     {
-       protected BookAndAuthorContext _context;
+       protected BookManagementContext _context;
 
         public Repo()
         {
-            _context = new BookAndAuthorContext(BookAndAuthorContext.options.dbOps);
+            _context = new BookManagementContext(BookManagementContext.options.dbOps);
         }
     }
 }

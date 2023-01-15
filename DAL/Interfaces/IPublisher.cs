@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    public interface IAuthor
+    public interface IPublisher
     {
-        Publisher GetAllBooksByAuthorId(int AuthorId);
+        Publisher GetAllBooksByPublisherId(int AuthorId);
 
     }
 }

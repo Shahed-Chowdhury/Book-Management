@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class PublisherRepo : Repo, IRepo<Publisher>, IAuthor
+    internal class PublisherRepo : Repo, IRepo<Publisher>, IPublisher
     {
         public Publisher Add(Publisher c)
         {
@@ -56,7 +56,7 @@ namespace DAL.Repos
             return null;
         }
 
-        public Publisher GetAllBooksByAuthorId(int AuthorId)
+        public Publisher GetAllBooksByPublisherId(int AuthorId)
         {
            var author = _context.Publishers.Select(b => new Publisher
              {
@@ -67,13 +67,6 @@ namespace DAL.Repos
              }).SingleOrDefault(x => x.Id == AuthorId);
 
              return author; 
-
-           // return _context.Authors.Include(x => x.Books).Where(a => a.Id == AuthorId).FirstOrDefault();
-
-            //var dbObj = _context.Authors.Where(a => a.Id == AuthorId).SingleOrDefault();
-
-           // return dbObj;
-
         }
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    public class AuthorDTO
+    public class PublisherDTO
     {
         public int Id { get; set; } = 0;
         public string Name { get; set; }
@@ -14,12 +14,13 @@ namespace BLL.DTOs
 
     }
 
-    public class AuthorDTO2
+    public class PublisherDTO2
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 
-    public class AuthorDTO3
+    public class PublisherDTO3
     {
         public int Id { get; set; }
         public string Name { get; set; }

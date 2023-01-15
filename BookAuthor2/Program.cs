@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Injecting dbcontext using dependency injection
-builder.Services.AddDbContext<BookAndAuthorContext>(
+builder.Services.AddDbContext<BookManagementContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("connectDB"))
 );
 

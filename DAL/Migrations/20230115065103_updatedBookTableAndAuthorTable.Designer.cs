@@ -4,16 +4,19 @@ using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace DAL.Migrations
 {
-    [DbContext(typeof(BookAndAuthorContext))]
-    partial class BookAndAuthorContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(BookManagementContext))]
+    [Migration("20230115065103_updatedBookTableAndAuthorTable")]
+    partial class updatedBookTableAndAuthorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,6 +25,34 @@ namespace DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("shortBio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Author");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.Property<int>("Id")
@@ -29,6 +60,13 @@ namespace DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("PublishedDate")
                         .HasMaxLength(50)
@@ -70,6 +108,17 @@ namespace DAL.Migrations
                     b.ToTable("Publishers");
                 });
 
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.HasOne("DAL.EF.Models.Book", "Book")
+                        .WithMany("Authors")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.HasOne("DAL.EF.Models.Publisher", "Publisher")
@@ -79,6 +128,11 @@ namespace DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("DAL.EF.Models.Book", b =>
+                {
+                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("DAL.EF.Models.Publisher", b =>

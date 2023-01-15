@@ -23,9 +23,25 @@ namespace DAL.EF.Models
         [Required]
         public BookType Type { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public decimal Price { get; set; } = 0;
+
         [Required, ForeignKey("Publisher")]
         public int PublisherId { get; set; }
         public Publisher Publisher { get; set; }
+
+        [Required]
+        public ICollection<Author> Authors { get; set; }
+
+        public Book()
+        {
+            Authors = new List<Author>();
+        }
+
+
       
     }
 
