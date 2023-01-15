@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BookAndAuthorContext))]
-    [Migration("20230108073833_UpdatedBooks")]
-    partial class UpdatedBooks
+    [Migration("20230115052452_renamedAuthorToPublisher")]
+    partial class renamedAuthorToPublisher
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,24 +24,6 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("DAL.EF.Models.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Authors");
-                });
 
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
@@ -73,9 +55,27 @@ namespace DAL.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("DAL.EF.Models.Publisher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publishers");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
-                    b.HasOne("DAL.EF.Models.Author", "Author")
+                    b.HasOne("DAL.EF.Models.Publisher", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -84,7 +84,7 @@ namespace DAL.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+            modelBuilder.Entity("DAL.EF.Models.Publisher", b =>
                 {
                     b.Navigation("Books");
                 });

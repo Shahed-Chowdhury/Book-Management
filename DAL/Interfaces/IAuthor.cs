@@ -9,7 +9,7 @@ namespace DAL.Interfaces
 {
     public interface IAuthor
     {
-        Author GetAllBooksByAuthorId(int AuthorId);
+        Publisher GetAllBooksByAuthorId(int AuthorId);
 
     }
 }

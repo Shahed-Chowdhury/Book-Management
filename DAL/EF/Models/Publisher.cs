@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.EF.Models
 {
-    public class Author
+    public class Publisher
     {
         [Key]
         public int Id { get; set; }
@@ -18,7 +18,7 @@ namespace DAL.EF.Models
 
         public ICollection<Book> Books { get; set; }
 
-        public Author()
+        public Publisher()
         {
             Books = new List<Book>();
         }

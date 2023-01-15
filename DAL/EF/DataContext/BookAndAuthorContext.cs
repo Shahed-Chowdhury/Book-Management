@@ -36,7 +36,7 @@ namespace DAL.DataContext
             this.ChangeTracker.LazyLoadingEnabled = false;
         }
 
-        public DbSet<Author> Authors { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Book> Books { get; set; }
     }
 }

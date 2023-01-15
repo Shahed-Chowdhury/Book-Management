@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class AuthorRepo : Repo, IRepo<Author>, IAuthor
+    internal class PublisherRepo : Repo, IRepo<Publisher>, IAuthor
     {
-        public Author Add(Author c)
+        public Publisher Add(Publisher c)
         {
             c.Id = 0;
 
-            _context.Authors.Add(c);
+            _context.Publishers.Add(c);
 
             if (_context.SaveChanges() > 0) return c;
 
@@ -24,28 +24,28 @@ namespace DAL.Repos
 
         }
 
-        public Author Delete(int id)
+        public Publisher Delete(int id)
         {
             var author = Get(id);
 
-            _context.Authors.Remove(author);
+            _context.Publishers.Remove(author);
 
             if(_context.SaveChanges() > 0) return author;   
 
             return null;
         }
 
-        public List<Author> Get()
+        public List<Publisher> Get()
         {
-            return _context.Authors.ToList();
+            return _context.Publishers.ToList();
         }
 
-        public Author Get(int id)
+        public Publisher Get(int id)
         {
-            return _context.Authors.SingleOrDefault(x => x.Id == id);
+            return _context.Publishers.SingleOrDefault(x => x.Id == id);
         }
 
-        public Author Update(Author c)
+        public Publisher Update(Publisher c)
         {
             var author = Get(c.Id);
 
@@ -56,9 +56,9 @@ namespace DAL.Repos
             return null;
         }
 
-        public Author GetAllBooksByAuthorId(int AuthorId)
+        public Publisher GetAllBooksByAuthorId(int AuthorId)
         {
-           var author = _context.Authors.Select(b => new Author
+           var author = _context.Publishers.Select(b => new Publisher
              {
                  Name = b.Name,
                  Books = b.Books,

@@ -37,7 +37,7 @@ namespace BLL.Services
         {
             var config = new MapperConfiguration(cfg => { 
                 cfg.CreateMap<Book, BookDTO2>();
-                cfg.CreateMap<Author, AuthorDTO2>();
+                cfg.CreateMap<Publisher, AuthorDTO2>();
             });
 
             var books = DataAccessFactory.BookDataAccess().Get();
@@ -55,7 +55,7 @@ namespace BLL.Services
 
              var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Book, BookDTO5>();
-                cfg.CreateMap<Author, AuthorDTO2>();
+                cfg.CreateMap<Publisher, AuthorDTO2>();
             }); 
 
             var mapper = new Mapper(config);

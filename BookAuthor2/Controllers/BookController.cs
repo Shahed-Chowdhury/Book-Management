@@ -75,7 +75,5 @@ namespace BookAuthor2.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        
     }
 }

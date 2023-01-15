@@ -6,14 +6,14 @@ namespace DAL
 {
     public class DataAccessFactory
     {
-        public static IRepo<Author> AuthorDataAccess()
+        public static IRepo<Publisher> PublisherDataAccess()
         {
-            return new AuthorRepo();
+            return new PublisherRepo();
         }
 
-        public static IAuthor AuthorDataAccessV2()
+        public static IAuthor PublisherDataAccessV2()
         {
-            return new AuthorRepo();
+            return new PublisherRepo();
         }
 
         public static IRepo<Book> BookDataAccess()

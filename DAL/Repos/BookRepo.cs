@@ -43,11 +43,11 @@ namespace DAL.Repos
             return _context.Books.Select(n => new Book
             {
                 Id = n.Id,
-                AuthorId = n.AuthorId,
+                PublisherId = n.PublisherId,
                 Title = n.Title,
                 Type = n.Type,
                 PublishedDate = n.PublishedDate,
-                Author = n.Author
+                Publisher = n.Publisher
             }).ToList();
 
             
@@ -58,11 +58,11 @@ namespace DAL.Repos
             var data = _context.Books.Select(n => new Book
             {
                Id = n.Id,
-               AuthorId = n.AuthorId,
+               PublisherId = n.PublisherId,
                Title = n.Title,
                Type = n.Type,
                PublishedDate = n.PublishedDate,
-               Author = n.Author
+               Publisher = n.Publisher
             }).FirstOrDefault(p => p.Id == id);
           
             return data;

@@ -23,9 +23,9 @@ namespace DAL.EF.Models
         [Required]
         public BookType Type { get; set; }
 
-        [Required, ForeignKey("Author")]
-        public int AuthorId { get; set; }
-        public Author Author { get; set; }
+        [Required, ForeignKey("Publisher")]
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
       
     }
 

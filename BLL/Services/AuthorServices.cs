@@ -20,7 +20,7 @@ namespace BLL.Services
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Author, AuthorDTO3>();
+                cfg.CreateMap<Publisher, AuthorDTO3>();
 
             });
 
@@ -35,14 +35,14 @@ namespace BLL.Services
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<AuthorDTO3, Author>();
-                cfg.CreateMap<Author, AuthorDTO3>();
+                cfg.CreateMap<AuthorDTO3, Publisher>();
+                cfg.CreateMap<Publisher, AuthorDTO3>();
 
             });
 
             var mapper = new Mapper(config);
 
-            var dbObj = mapper.Map<Author>(dto);
+            var dbObj = mapper.Map<Publisher>(dto);
 
             var data = DataAccessFactory.AuthorDataAccess().Add(dbObj);
 
@@ -53,13 +53,13 @@ namespace BLL.Services
         // get author by id
         public static AuthorDTO3 Get(int id)
         {
-            var config = new MapperConfiguration(cfg => { cfg.CreateMap<Author, AuthorDTO3>(); });
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<Publisher, AuthorDTO3>(); });
 
             var mapper = new Mapper(config);
 
             var dbObj = DataAccessFactory.AuthorDataAccess().Get(id);
 
-            return mapper.Map<Author, AuthorDTO3>(dbObj);
+            return mapper.Map<Publisher, AuthorDTO3>(dbObj);
 
         }
 
@@ -68,13 +68,13 @@ namespace BLL.Services
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<AuthorDTO3, Author>();
-                cfg.CreateMap<Author, AuthorDTO3>();
+                cfg.CreateMap<AuthorDTO3, Publisher>();
+                cfg.CreateMap<Publisher, AuthorDTO3>();
             });
 
             var mapper = new Mapper(config);
 
-            var dbObj = mapper.Map<Author>(dto);
+            var dbObj = mapper.Map<Publisher>(dto);
 
             var db_obj = DataAccessFactory.AuthorDataAccess().Update(dbObj);
 
@@ -88,7 +88,7 @@ namespace BLL.Services
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Author, AuthorDTO>();
+                cfg.CreateMap<Publisher, AuthorDTO>();
             });
 
             var mapper = new Mapper(config);
