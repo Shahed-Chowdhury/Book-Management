@@ -1,4 +1,5 @@
 using DAL.DataContext;
+using DAL.EF.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,14 +9,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Injecting dbcontext using dependency injection
+
+
+builder.Services.AddTransient<DataSeeder>();
+
 builder.Services.AddDbContext<BookManagementContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("connectDB"))
 );
+
+void seedData(IHost app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<DataSeeder>();
+        service.Seed();
+    }
+}
 
 //services cors
 
 
 var app = builder.Build();
+
+seedData(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
