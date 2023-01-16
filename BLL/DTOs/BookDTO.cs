@@ -35,15 +35,17 @@ namespace BLL.DTOs
     {
         public int Id { get; set; }
 
+        public int TotalCount { get; set; }
+
         [Required]
         public string Title { get; set; }
 
         [Required, EnumDataType(typeof(BookType))]
         public BookType Type { get; set; }
 
-        public PublisherDTO2? Publisher { get; set; }
+        //public PublisherDTO2? Publisher { get; set; }
 
-        public ICollection<AuthorDTO2> Authors { get; set; }
+        //public ICollection<AuthorDTO2> Authors { get; set; }
 
     }
 

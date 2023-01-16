@@ -19,6 +19,7 @@ import { AddComponent as BookAddComponent } from './component/book/add/add.compo
 import { EditComponent as BookEditComponent } from './component/book/edit/edit.component';
 import { DeleteComponent as BookDeleteComponent } from './component/book/delete/delete.component';
 import { DetailsComponent as BookDetailsComponent } from './component/book/details/details.component';
+import { PaginationButtonComponent } from './component/pagination-button/pagination-button.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DetailsComponent as BookDetailsComponent } from './component/book/detai
     BookEditComponent,
     BookDeleteComponent,
     BookDetailsComponent,
+    PaginationButtonComponent,
   ],
 
   imports: [

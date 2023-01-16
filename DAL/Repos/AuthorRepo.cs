@@ -37,7 +37,7 @@ namespace DAL.Repos
 
         }
 
-        public List<Author> Get()
+        public List<Author> Get(int page = 1, int pageSize = 10)
         {
             return _context.Authors.ToList();
         }

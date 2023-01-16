@@ -23,11 +23,11 @@ namespace BookAuthor2.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll(int page = 1, int pageSize = 10)
         {
             try
             {
-                return Ok(new { status="success", data=BookServices.Get() });
+                return Ok(new { status="success", data=BookServices.GetAll(page, pageSize) });
             }
             catch (Exception ex)
             {

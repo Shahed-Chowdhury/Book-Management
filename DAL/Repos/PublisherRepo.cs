@@ -35,7 +35,7 @@ namespace DAL.Repos
             return null;
         }
 
-        public List<Publisher> Get()
+        public List<Publisher> Get(int page = 1, int pageSize = 10)
         {
             return _context.Publishers.ToList();
         }

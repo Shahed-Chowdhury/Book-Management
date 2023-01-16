@@ -33,7 +33,7 @@ namespace BLL.Services
             return bookDTO;
         }
 
-        public static List<BookDTO2> Get()
+        public static List<BookDTO2> GetAll(int page, int pageSize)
         {
             var config = new MapperConfiguration(cfg => { 
                 cfg.CreateMap<Book, BookDTO2>();
@@ -41,11 +41,25 @@ namespace BLL.Services
                 cfg.CreateMap<Author, AuthorDTO2>();
             });
 
-            var books = DataAccessFactory.BookDataAccess().Get();
+            var books = DataAccessFactory.BookDataAccess().Get(page, pageSize);
+
+            int totalCount = books.Count();
+
+            books = books.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
+
 
             var mapper = new Mapper(config);
 
-            return mapper.Map<List<BookDTO2>>(books);
+            var dto = mapper.Map<List<BookDTO2>>(books);
+
+            dto.ForEach(e =>
+            {
+                e.TotalCount = totalCount;
+            });
+
+            return dto;
+
+
 
         }
 

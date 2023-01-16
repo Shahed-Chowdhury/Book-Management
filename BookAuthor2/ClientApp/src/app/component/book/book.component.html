@@ -6,7 +6,6 @@
             <tr>
                 <td>Title</td>
                 <td>Type</td>
-                <td>Author</td>
                 <td>Info</td>
                 <td>Edit</td>
                 <td>Delete</td>
@@ -16,11 +15,11 @@
             <tr *ngFor="let book of books.data">
                 <td>{{book.title}}</td>
                 <td>{{genre[book.type]}}</td>
-                <td>{{book.author.name}}</td>
                 <td><a [routerLink]="['/book/details', book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
                 <td><a [routerLink]="['/book/edit', book.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
                 <td><a [routerLink]="['/book/delete', book.id]"><fa-icon [icon]="faCross"></fa-icon></a></td>
             </tr>
         </tbody>
     </table>
+    <app-pagination-button [parent]="'book'" [nextCount]=totalCount [page]="page"></app-pagination-button>
 </div>

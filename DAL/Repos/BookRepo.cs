@@ -38,10 +38,9 @@ namespace DAL.Repos
 
         }
 
-        public List<Book> Get()
+        public List<Book> Get(int page = 1, int pageSize = 10)
         {
-
-            return _context.Books.Select(n => new Book
+            var returnObject = _context.Books.Select(n => new Book
             {
                 Id = n.Id,
                 PublisherId = n.PublisherId,
@@ -50,7 +49,8 @@ namespace DAL.Repos
                 PublishedDate = n.PublishedDate,
                 Publisher = n.Publisher,
                 Authors = n.Authors
-            }).ToList();
+            });
+            return returnObject.ToList();
 
         }
 

@@ -8,7 +8,7 @@ namespace DAL.Interfaces
 {
     public interface IRepo <Class>
     {
-        List<Class> Get();
+        List<Class> Get(int page = 1, int pageSize = 10);
 
         Class Get(int id);
 
