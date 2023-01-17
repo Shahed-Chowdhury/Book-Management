@@ -17,7 +17,7 @@
                 <td>{{genre[book.type]}}</td>
                 <td><a [routerLink]="['/book/details', book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
                 <td><a [routerLink]="['/book/edit', book.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
-                <td><a [routerLink]="['/book/delete', book.id]"><fa-icon [icon]="faCross"></fa-icon></a></td>
+                <td><a [routerLink]="['/book/delete', book.id]" [queryParams]="{page: page}"><fa-icon [icon]="faCross"></fa-icon></a></td>
             </tr>
         </tbody>
     </table>
