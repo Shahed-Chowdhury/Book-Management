@@ -1,5 +1,5 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-50">
-    <div>
+    <div class="mb-5">
         <h1 class="p-5">Edit Book</h1>
         <form>
             <div class="name">
@@ -8,19 +8,51 @@
             </div> <br>
             <div class="type">
                 <label for="Name">Type:</label>&nbsp;
-                <select name="" id="selectGenre" class="w-100">
+                <select name="" id="selectGenre" class="w-100 p-2">
                     <option *ngFor="let type of genre; let indexof = index" value="{{indexof}}">{{type}}</option>
                 </select> 
             </div> <br>
-            <div class="author">
-                <label for="author">Author:</label>&nbsp;
-                <select name="" id="selectAuthor" class="w-100">
-                    <option value="{{authors.data.authorId}}">{{authors.data.author.name}}</option>
-                </select> 
-            </div> 
+            <div class="description">
+                <label for="desc">Description:</label>&nbsp;
+                <textarea name="" style="resize: none;" id="" cols="30" rows="5" class="w-100 p-2">{{authors.data.description}}</textarea>
+            </div> <br>
+            <div class="price">
+                <label for="price">Price:</label>&nbsp;
+                <input type="number" class="w-100 p-2" name="" id="" value="{{authors.data.price}}">
+            </div> <br>
+            <div class="publishedDate">
+                <label for="pDate">Published Date:</label>&nbsp;
+                <input type="date" name="pDate" id="pDate" class="w-100 p-2" value="{{authors.data.publishedDate.split('T')[0]}}">
+            </div><br>
+            <div class="publisher">
+                <label for="pDate">Publishers:</label>&nbsp;
+                <select name="publisher" id="publisher" class="w-100 p-2" ngModel="{{authors.data.publisher.id}}">
+                    <option
+                        *ngFor="let publisher of publishers.data"
+                        ngValue="{{publisher.id}}"
+                    >
+                        {{publisher.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="authors mt-3 mb-3">
+                <p>Authors:</p>
+                <div class="author-available"  *ngIf="authors.data.authors.length > 0">
+                    <div class="author shadow"
+                        (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)"
+                        *ngFor="let author of authors.data.authors">
+                        <fa-icon [icon]="faCross"></fa-icon>&nbsp;
+                        {{author.name}}
+                    </div>
+                </div>
+                <div class="author shadow" (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)">
+                    <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
+                    Add author
+                </div>
+            </div>
             <div class="button">
                 <br>
-                <button class="btn btn-primary w-100" (click)="editBook()">Update Book</button>
+                <button class="btn btn-primary w-100 p-2" (click)="editBook()">Update Book</button>
             </div>
         </form>
     </div>
