@@ -5,28 +5,43 @@
             <a [routerLink]="['/book/edit', bookId]" class="btn btn-primary w-100 p-3">Edit book</a>
         </div>
         <div class="col-lg-6">
-            <a [routerLink]="['/book/delete', bookId]" class="btn btn-secondary w-100 p-3">Delete Author</a> 
+            <a [routerLink]="['/book/delete', bookId]" class="btn btn-secondary w-100 p-3">Delete book</a> 
         </div>
     </div>
-    <h3 class="p-3 text-center">Details</h3> 
-    <table class="table mb-5">
-        <thead>
-            <tr>
-                <td>Title</td>
-                <td>Type</td>
-                <td>Author</td>
-                <td>Published date</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{book.data.title}}</td>
-                <td>{{genre[book.data.type]}}</td>
-                <td>{{book.data.author.name}}</td>
-                <td>{{book.data.publishedDate}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h3 class="p-3 text-center">Details</h3> <hr>
+    <p>
+        <b>Title: </b>
+        {{book.data.title}}
+    </p>
+    <p>
+        <b>Type:</b>
+        {{genre[book.data.type]}}
+    </p>
+    <p>
+        <b>Published date:</b>
+        {{book.data.publishedDate.split("T")[0]}}
+    </p>
+    <p>
+        <b>Publisher: </b>
+        {{book.data.publisher.name}}
+    </p>
+    <p>
+        <b>Price: </b>
+        {{book.data.price}}
+    </p>
+    <p>
+        <b>Description: </b>
+        {{book.data.description}}
+    </p>
+    <p *ngIf="book.data.authors.length > 0">
+        <b>Authors: </b>
+        <select name="" id="" (change)="GoToAuthorDetails($event)">
+            <option value="" disabled selected><b>View authors</b></option>
+            <option *ngFor="let authors of book.data.authors" value={{authors.id}} >
+                {{authors.name}}
+            </option>
+        </select>
+    </p>
 </div>
 
 

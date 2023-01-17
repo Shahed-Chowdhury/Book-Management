@@ -36,4 +36,9 @@ export class DetailsComponent implements OnInit {
     })
   }
 
+  GoToAuthorDetails(event: any)
+  {
+    this.router.navigate(["/author/details/"+event.target.value]);
+  }
+
 }

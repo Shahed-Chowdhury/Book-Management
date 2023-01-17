@@ -71,6 +71,7 @@ namespace BLL.Services
              var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Book, BookDTO5>();
                 cfg.CreateMap<Publisher, PublisherDTO2>();
+                cfg.CreateMap<Author, AuthorDTO2>();
             }); 
 
             var mapper = new Mapper(config);

@@ -94,7 +94,15 @@ namespace BLL.DTOs
         [Required, StringLength(50)]
         public DateTime PublishedDate { get; set; }
 
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public decimal Price { get; set; } = 0;
+
         public PublisherDTO2? Publisher { get; set; }
+
+        public ICollection<AuthorDTO2> Authors { get; set; }
 
     }
 }

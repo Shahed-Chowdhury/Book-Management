@@ -63,7 +63,10 @@ namespace DAL.Repos
                Title = n.Title,
                Type = n.Type,
                PublishedDate = n.PublishedDate,
-               Publisher = n.Publisher
+               Publisher = n.Publisher,
+               Authors = n.Authors,
+               Description = n.Description,
+               Price = n.Price
             }).FirstOrDefault(p => p.Id == id);
           
             return data;
