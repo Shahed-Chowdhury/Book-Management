@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Component, OnInit } from '@angular/core';
 import { faInfoCircle, faPenNib, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit',
@@ -10,7 +11,7 @@ import { faInfoCircle, faPenNib, faTrash, faPlusCircle } from '@fortawesome/free
 })
 export class EditComponent implements OnInit {
 
-  genre: Array<String> = ["Fantasy", "Science", "Horror"];
+  genre: Array<String> = environment.bookGenres;
   book: any
   authors: any
   bookId!: Number 
@@ -86,4 +87,24 @@ export class EditComponent implements OnInit {
     event.target.style.fontSize = "100%";
   }
 
+  deleteAuthor(authorId: Number)
+  {
+    this.apiservice.deleteAuthor(authorId).subscribe(res => {
+      
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=> {
+        this.router.navigate(['/book/edit', this.bookId])
+      })
+      
+    }, err=> {
+      alert("Unable to delete author");
+      console.log(err)
+    });
+  }
+
+  addAuthor()
+  {
+    this.router.navigate(['/author/add'], {queryParams: {bookId: this.bookId}})
+  }
 }
+
+

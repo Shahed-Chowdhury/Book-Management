@@ -40,12 +40,18 @@
                 <div class="author-available"  *ngIf="authors.data.authors.length > 0">
                     <div class="author shadow"
                         (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)"
-                        *ngFor="let author of authors.data.authors">
+                        *ngFor="let author of authors.data.authors"
+                        (click)="deleteAuthor(author.id)"
+                    >
                         <fa-icon [icon]="faCross"></fa-icon>&nbsp;
                         {{author.name}}
                     </div>
                 </div>
-                <div class="author shadow" (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)">
+                <div class="author shadow"
+                    (mouseover)="authorMouseEnter($event)" 
+                    (mouseleave)="authorMouseLeave($event)"
+                    (click)="addAuthor()"
+                >
                     <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
                     Add author
                 </div>

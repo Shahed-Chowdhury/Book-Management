@@ -27,7 +27,7 @@ export class ApiService {
 
   editAuthor(data: any) {return this.httpclient.patch(`${this.Api_URL}/author/edit`, data, { headers: this.headers })}
 
-  deleteAuthor(id: Number) {return this.httpclient.delete(`${this.Api_URL}/author/${id}`)}
+  deleteAuthor(id: Number) {return this.httpclient.delete(`${this.Api_URL}/author/delete/${id}`)}
 
   getAllBooks(page: Number = 1) {return this.httpclient.get(`${this.Api_URL}/book?page=${page}`)}
 

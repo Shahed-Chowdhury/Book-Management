@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import { faInfoCircle, faPenNib, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-book',
@@ -16,7 +18,7 @@ export class BookComponent implements OnInit {
   faInfo = faInfoCircle;
   faPenNib = faPenNib;
   faCross = faTrash;
-  genre: Array<String> = ["Fantasy", "Science", "Horror"];
+  genre: Array<String> = environment.bookGenres;
   page: Number = 1
   totalCount!: 0
 
