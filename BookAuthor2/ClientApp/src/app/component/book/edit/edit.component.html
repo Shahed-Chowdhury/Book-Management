@@ -2,28 +2,36 @@
     <div class="mb-5">
         <h1 class="p-5">Edit Book</h1>
         <form>
+
             <div class="name">
-                <label for="Name">Title:</label>&nbsp;
-                <input type="text" name="Name" id="BookName" class="p-2 w-100" value="{{authors.data.title}}">
+                <label for="Name">Title:</label>
+                <input type="text" name="Name" [(ngModel)]="title" id="BookName" class="p-2 w-100">
             </div> <br>
+
             <div class="type">
-                <label for="Name">Type:</label>&nbsp;
-                <select name="" id="selectGenre" class="w-100 p-2">
-                    <option *ngFor="let type of genre; let indexof = index" value="{{indexof}}">{{type}}</option>
+                <label for="type">Type:</label>&nbsp;
+                <select name="genre" id="selectGenre" class="w-100 p-2" [(ngModel)]="type">
+                    <option *ngFor="let g of genre; let i = index" [value]="i">{{g}}</option>
                 </select> 
             </div> <br>
+
             <div class="description">
                 <label for="desc">Description:</label>&nbsp;
-                <textarea name="" style="resize: none;" id="" cols="30" rows="5" class="w-100 p-2">{{authors.data.description}}</textarea>
+                <textarea name="desc" style="resize: none;" id="" cols="30" rows="5" class="w-100 p-2"
+                [(ngModel)]="description"
+                [value]="authors.data.description"></textarea>
             </div> <br>
+
             <div class="price">
                 <label for="price">Price:</label>&nbsp;
-                <input type="number" class="w-100 p-2" name="" id="" value="{{authors.data.price}}">
+                <input type="number" class="w-100 p-2" name="price" id="" value="{{authors.data.price}}">
             </div> <br>
+
             <div class="publishedDate">
                 <label for="pDate">Published Date:</label>&nbsp;
                 <input type="date" name="pDate" id="pDate" class="w-100 p-2" value="{{authors.data.publishedDate.split('T')[0]}}">
             </div><br>
+
             <div class="publisher">
                 <label for="pDate">Publishers:</label>&nbsp;
                 <select name="publisher" id="publisher" class="w-100 p-2" ngModel="{{authors.data.publisher.id}}">
@@ -35,6 +43,7 @@
                     </option>
                 </select>
             </div>
+
             <div class="authors mt-3 mb-3">
                 <p>Authors:</p>
                 <div class="author-available"  *ngIf="authors.data.authors.length > 0">

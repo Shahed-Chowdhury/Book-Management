@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  bookGenres: ["Fantasy", "Science", "Horror"]
+  bookGenres: ["Fantasy", "Science", "Horror"],
+  bookGenre2: [{id: 1, name: "Fantasy"}, {id:2, name: "Science"}, {id:3, name:"Horror"}]
 };
 
 /*

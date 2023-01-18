@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EditComponent implements OnInit {
 
-  genre: Array<String> = environment.bookGenres;
+  genre: any = environment.bookGenres;
   book: any
   authors: any
   bookId!: Number 
@@ -20,6 +20,14 @@ export class EditComponent implements OnInit {
   faPenNib = faPenNib;
   faCross = faTrash;
   faPlus = faPlusCircle;
+
+  // ----------------------- Form input
+  title!: string
+  type!: number
+  description!: string
+  price!: number
+  publishedDate!: string
+  publisherId!: number
 
   constructor(private apiservice: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -35,8 +43,10 @@ export class EditComponent implements OnInit {
   {
     this.apiservice.getBookById(id).subscribe(res => {
       this.authors = res
-      //console.log(new Date(this.authors.data.publishedDate.split("T")[0]))
-      console.log(this.authors)
+      this.title = this.authors.data.title
+      this.type = this.authors.data.type
+      this.description = this.authors.data.description
+      console.log(this.description)
     })
   }
 
@@ -58,23 +68,21 @@ export class EditComponent implements OnInit {
 
   editBook()
   {
-    const title = (<HTMLInputElement>document.querySelector("#BookName")).value;
-    const genre = Number((<HTMLInputElement>document.querySelector("#selectGenre")).value);
-    const author = Number((<HTMLInputElement>document.querySelector("#selectAuthor")).value);
+    console.log(this.type)
 
-    const data = {
-      "Id": this.bookId,
-      "Title": title,
-      "Type": genre,
-      "AuthorId": author
-    }
+    // const data = {
+    //   "Id": this.bookId,
+    //   "Title": title,
+    //   "Type": genre,
+    //   "AuthorId": author
+    // }
 
-    this.apiservice.editBook(data).subscribe(res => {
-      alert("Book updated successfully")
-    },err => {
-      alert("Error")
-      console.log(err)
-    })
+    // this.apiservice.editBook(data).subscribe(res => {
+    //   alert("Book updated successfully")
+    // },err => {
+    //   alert("Error")
+    //   console.log(err)
+    // })
   }
 
   authorMouseEnter(event: any)

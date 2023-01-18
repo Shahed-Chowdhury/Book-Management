@@ -21,6 +21,9 @@ export class BookComponent implements OnInit {
   genre: Array<String> = environment.bookGenres;
   page: Number = 1
   totalCount!: 0
+  loadPage = true
+  spinner = true
+  
 
   constructor(private apiservice: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -34,9 +37,14 @@ export class BookComponent implements OnInit {
   public getAllBooks(page : Number)
   {
     this.apiservice.getAllBooks(page).subscribe(res => {
+      this.loadPage = true
       this.books = res
       this.totalCount = this.books.data[0].totalCount // total count is given in the dtos
+      this.spinner = false
+      
     }, err => {
+      this.loadPage = false
+      this.spinner = false
       console.log(err)
     })
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-add',
@@ -10,18 +11,31 @@ import { Router } from '@angular/router';
 export class AddComponent implements OnInit {
 
   author: any
+  bookId!: number
+  name!: string
+  dob!: string
+  sbio!: string
 
-  constructor(private apiservice: ApiService, private router: Router) { }
+
+  constructor(private apiservice: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParamMap.subscribe(params => {
+      this.bookId = Number(params.get("bookId")) // gets either book id or 0
+      if(this.bookId === 0 )
+      {
+        this.router.navigate(["/books"], {queryParams: {page: 1}})
+      }
+    })
   }
 
   public Add() {
-    const name = (<HTMLInputElement>document.querySelector("#AuthorName")).value
-    const data = {Name: name}
+
+    const data = {Name: this.name, DOB: this.dob, shortBio: this.sbio, BookId: this.bookId}
+
     this.apiservice.addAuthor(data).subscribe(response => {
       this.author = response
-      this.router.navigate(['/authors'])
+      this.router.navigate([`/book/edit/${this.bookId}`])
     }, err => {
       console.log(err)
       alert("Unable to add user")

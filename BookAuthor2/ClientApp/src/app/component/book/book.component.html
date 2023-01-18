@@ -1,25 +1,33 @@
 <div class="container">
     <h1 class="p-5 text-center">All books</h1>
-    <a [routerLink]="['/book/add']" class="btn btn-success">Add book</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <td>Title</td>
-                <td>Type</td>
-                <td>Info</td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let book of books.data">
-                <td>{{book.title}}</td>
-                <td>{{genre[book.type]}}</td>
-                <td><a [routerLink]="['/book/details', book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
-                <td><a [routerLink]="['/book/edit', book.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
-                <td><a [routerLink]="['/book/delete', book.id]" [queryParams]="{page: page}"><fa-icon [icon]="faCross"></fa-icon></a></td>
-            </tr>
-        </tbody>
-    </table>
-    <app-pagination-button [parent]="'book'" [nextCount]=totalCount [page]="page"></app-pagination-button>
+    
+    <app-spinner [spinner]="spinner"></app-spinner>
+
+    <div *ngIf="loadPage == true && spinner == false">
+        <a [routerLink]="['/book/add']" class="btn btn-success">Add book</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Type</td>
+                    <td>Info</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of books.data">
+                    <td>{{book.title}}</td>
+                    <td>{{genre[book.type]}}</td>
+                    <td><a [routerLink]="['/book/details', book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+                    <td><a [routerLink]="['/book/edit', book.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
+                    <td><a [routerLink]="['/book/delete', book.id]" [queryParams]="{page: page}"><fa-icon [icon]="faCross"></fa-icon></a></td>
+                </tr>
+            </tbody>
+        </table>
+        <app-pagination-button [parent]="'book'" [nextCount]=totalCount [page]="page"></app-pagination-button>
+    </div>
+    <div class="div" *ngIf="loadPage == false && spinner == false">
+        <h4 class="text-center">Unable to load data 🥲</h4>
+    </div>
 </div>

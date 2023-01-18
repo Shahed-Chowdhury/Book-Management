@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { AuthorComponent } from './component/author/author.component';
 import { BookComponent } from './component/book/book.component';
@@ -20,6 +19,7 @@ import { EditComponent as BookEditComponent } from './component/book/edit/edit.c
 import { DeleteComponent as BookDeleteComponent } from './component/book/delete/delete.component';
 import { DetailsComponent as BookDetailsComponent } from './component/book/details/details.component';
 import { PaginationButtonComponent } from './component/pagination-button/pagination-button.component';
+import { SpinnerComponent } from './component/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { PaginationButtonComponent } from './component/pagination-button/paginat
     BookDeleteComponent,
     BookDetailsComponent,
     PaginationButtonComponent,
+    SpinnerComponent,
   ],
 
   imports: [
@@ -59,6 +60,7 @@ import { PaginationButtonComponent } from './component/pagination-button/paginat
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
     ]),
     FontAwesomeModule,
+    FormsModule
     
   ],
   providers: [],
