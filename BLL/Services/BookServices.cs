@@ -33,7 +33,7 @@ namespace BLL.Services
             return bookDTO;
         }
 
-        public static List<BookDTO2> GetAll(int page, int pageSize)
+        public static List<BookDTO2> GetAll(int page, int pageSize, string search)
         {
             var config = new MapperConfiguration(cfg => { 
                 cfg.CreateMap<Book, BookDTO2>();
@@ -45,8 +45,12 @@ namespace BLL.Services
 
             int totalCount = books.Count();
 
-            books = books.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
+            if (search != null)
+            {
+                books = books.Where(x => x.Title.ToLower().StartsWith(search.ToLower())).ToList();
+            }
 
+            books = books.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
 
             var mapper = new Mapper(config);
 

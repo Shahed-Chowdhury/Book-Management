@@ -29,7 +29,7 @@ export class ApiService {
 
   deleteAuthor(id: Number) {return this.httpclient.delete(`${this.Api_URL}/author/delete/${id}`)}
 
-  getAllBooks(page: Number = 1) {return this.httpclient.get(`${this.Api_URL}/book?page=${page}`)}
+  getAllBooks(page: Number = 1, search: string = "") {return this.httpclient.get(`${this.Api_URL}/book?page=${page}&search=${search}`)}
 
   addBook(data: any) {return this.httpclient.post(`${this.Api_URL}/book/add`, data, {headers: this.headers})} 
 

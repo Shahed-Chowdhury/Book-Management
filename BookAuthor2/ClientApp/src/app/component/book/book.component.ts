@@ -23,6 +23,7 @@ export class BookComponent implements OnInit {
   totalCount!: 0
   loadPage = true
   spinner = true
+  searchField!: string
   
 
   constructor(private apiservice: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -34,9 +35,9 @@ export class BookComponent implements OnInit {
     })
   }
 
-  public getAllBooks(page : Number)
+  public getAllBooks(page : Number, search: string = "")
   {
-    this.apiservice.getAllBooks(page).subscribe(res => {
+    this.apiservice.getAllBooks(page, search).subscribe(res => {
       this.loadPage = true
       this.books = res
       this.totalCount = this.books.data[0].totalCount // total count is given in the dtos
@@ -48,4 +49,7 @@ export class BookComponent implements OnInit {
       console.log(err)
     })
   }
+
+  public search(){ this.getAllBooks(this.page, this.searchField) }
+
 }
