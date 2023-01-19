@@ -81,6 +81,8 @@ namespace BLL.DTOs
         [Required]
         public int PublisherId { get; set; }
 
+        public DateTime PublishedDate { get; set; }
+
     }
 
     public class BookDTO5

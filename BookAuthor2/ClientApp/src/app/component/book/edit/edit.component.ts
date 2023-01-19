@@ -13,13 +13,13 @@ export class EditComponent implements OnInit {
 
   genre: any = environment.bookGenres;
   book: any
-  authors: any
   bookId!: Number 
   publishers: any
   faInfo = faInfoCircle;
   faPenNib = faPenNib;
   faCross = faTrash;
   faPlus = faPlusCircle;
+  bookDetails: any
 
   // ----------------------- Form input
   title!: string
@@ -28,6 +28,8 @@ export class EditComponent implements OnInit {
   price!: number
   publishedDate!: string
   publisherId!: number
+  authors: any
+  totalAuthors!: number
 
   constructor(private apiservice: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -42,11 +44,15 @@ export class EditComponent implements OnInit {
   getBookDetails(id: Number)
   {
     this.apiservice.getBookById(id).subscribe(res => {
-      this.authors = res
-      this.title = this.authors.data.title
-      this.type = this.authors.data.type
-      this.description = this.authors.data.description
-      console.log(this.description)
+      this.bookDetails = res
+      this.title = this.bookDetails.data.title
+      this.type = this.bookDetails.data.type
+      this.description = this.bookDetails.data.description
+      this.price = this.bookDetails.data.price
+      this.publishedDate = this.bookDetails.data.publishedDate.split('T')[0]
+      this.publisherId = this.bookDetails.data.publisher.id
+      this.authors = this.bookDetails.data.authors
+      this.totalAuthors = this.authors.length      
     })
   }
 
@@ -54,35 +60,37 @@ export class EditComponent implements OnInit {
   {
     this.apiservice.getAuthors().subscribe(res => {
       this.authors = res;
-      console.log(this.authors)
     })
   }
 
   getPublishers()
   {
     this.apiservice.getPublishers().subscribe(res => {
-      this.publishers = res
-      console.log(this.publishers)
+      var resp:any = res
+      this.publishers = resp.data
     })
   }
 
   editBook()
   {
-    console.log(this.type)
+    
+    const data = {
+      "Id": this.bookId,
+      "Title": this.title,
+      "Type": Number(this.type),
+      "Description": this.description,
+      "Price": this.price,
+      "PublisherId": Number(this.publisherId)
+    }
 
-    // const data = {
-    //   "Id": this.bookId,
-    //   "Title": title,
-    //   "Type": genre,
-    //   "AuthorId": author
-    // }
+    console.log(data);
 
-    // this.apiservice.editBook(data).subscribe(res => {
-    //   alert("Book updated successfully")
-    // },err => {
-    //   alert("Error")
-    //   console.log(err)
-    // })
+    this.apiservice.editBook(data).subscribe(res => {
+      alert("Book updated successfully")
+    },err => {
+      alert("Error")
+      console.log(err)
+    })
   }
 
   authorMouseEnter(event: any)

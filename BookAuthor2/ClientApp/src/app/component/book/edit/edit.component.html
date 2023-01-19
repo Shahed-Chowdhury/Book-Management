@@ -19,25 +19,25 @@
                 <label for="desc">Description:</label>&nbsp;
                 <textarea name="desc" style="resize: none;" id="" cols="30" rows="5" class="w-100 p-2"
                 [(ngModel)]="description"
-                [value]="authors.data.description"></textarea>
+                ></textarea>
             </div> <br>
 
             <div class="price">
                 <label for="price">Price:</label>&nbsp;
-                <input type="number" class="w-100 p-2" name="price" id="" value="{{authors.data.price}}">
+                <input type="number" class="w-100 p-2" name="price" id="" [(ngModel)]="price">
             </div> <br>
 
             <div class="publishedDate">
                 <label for="pDate">Published Date:</label>&nbsp;
-                <input type="date" name="pDate" id="pDate" class="w-100 p-2" value="{{authors.data.publishedDate.split('T')[0]}}">
+                <input type="date" name="pDate" id="pDate" class="w-100 p-2" [(ngModel)]="publishedDate" disabled="">
             </div><br>
 
             <div class="publisher">
                 <label for="pDate">Publishers:</label>&nbsp;
-                <select name="publisher" id="publisher" class="w-100 p-2" ngModel="{{authors.data.publisher.id}}">
+                <select name="publisher" id="publisher" class="w-100 p-2" [(ngModel)]="publisherId">
                     <option
-                        *ngFor="let publisher of publishers.data"
-                        ngValue="{{publisher.id}}"
+                        *ngFor="let publisher of publishers"
+                        [value]="publisher.id"
                     >
                         {{publisher.name}}
                     </option>
@@ -46,10 +46,10 @@
 
             <div class="authors mt-3 mb-3">
                 <p>Authors:</p>
-                <div class="author-available"  *ngIf="authors.data.authors.length > 0">
+                <div class="author-available"  *ngIf="totalAuthors > 0">
                     <div class="author shadow"
                         (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)"
-                        *ngFor="let author of authors.data.authors"
+                        *ngFor="let author of authors"
                         (click)="deleteAuthor(author.id)"
                     >
                         <fa-icon [icon]="faCross"></fa-icon>&nbsp;
