@@ -2,25 +2,52 @@
     <div>
         <h1 class="p-5">Add Book</h1>
         <form>
+
             <div class="name">
                 <label for="Name">Title:</label>&nbsp;
-                <input type="text" name="Name" id="BookName" class="p-2 w-100">
+                <input type="text" name="Name" id="BookName" class="p-2 w-100" [(ngModel)]="title">
             </div> <br>
+
             <div class="type">
                 <label for="Name">Type:</label>&nbsp;
-                <select name="" id="selectGenre" class="w-100">
-                    <option *ngFor="let type of genre; let indexof = index" value="{{indexof}}">{{type}}</option>
+                <select name="genre" id="selectGenre" class="w-100 p-2" [(ngModel)]="genreId">
+                    <option *ngFor="let type of genre; let i = index" [value]="i">{{type}}</option>
                 </select> 
             </div> <br>
-            <div class="author">
-                <label for="author">Author:</label>&nbsp;
-                <select name="" id="selectAuthor" class="w-100">
-                    <option *ngFor="let author of authors.data" value="{{author.id}}">{{author.name}}</option>
-                </select> 
-            </div> 
-            <div class="button">
+
+            <div class="description">
+                <label for="desc">Description:</label>&nbsp;
+                <textarea name="desc" [(ngModel)]="description" style="resize: none;" id="" cols="30" rows="5" class="w-100 p-2"
+                ></textarea>
+            </div> <br>
+
+            <div class="price">
+                <label for="price">Price:</label>&nbsp;
+                <input type="number" class="w-100 p-2" name="price" id="" [(ngModel)]="price">
+            </div> <br>
+
+            
+            <div class="publisher">
+                <label for="pDate">Publishers:</label>&nbsp;
+                <select name="publisher" id="publisher" class="w-100 p-2" [(ngModel)]="publisherId">
+                    <option
+                        *ngFor="let publisher of publishers"
+                        [value]="publisher.id"
+                    >
+                        {{publisher.name}}
+                    </option>
+                </select>
+            </div>
+            
+            <!-- <div class="author shadow mt-3 mb-3" (click)=""
+                >
+                    <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
+                    Add author
+                </div> -->
+
+            <div class="button mb-5">
                 <br>
-                <button class="btn btn-primary w-100" (click)="addBook()">Add Book</button>
+                <button class="btn btn-primary w-100 p-3" (click)="addBook()">Add Book</button>
             </div>
         </form>
     </div>

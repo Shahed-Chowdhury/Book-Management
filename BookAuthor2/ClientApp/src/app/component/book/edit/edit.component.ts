@@ -83,14 +83,13 @@ export class EditComponent implements OnInit {
       "PublisherId": Number(this.publisherId)
     }
 
-    console.log(data);
-
     this.apiservice.editBook(data).subscribe(res => {
       alert("Book updated successfully")
     },err => {
       alert("Error")
       console.log(err)
     })
+    
   }
 
   authorMouseEnter(event: any)
