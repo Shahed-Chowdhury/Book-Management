@@ -47,10 +47,13 @@ namespace BLL.Services
 
             if (search != null)
             {
-                books = books.Where(x => x.Title.ToLower().StartsWith(search.ToLower())).ToList();
+                books = books.Where(x => x.Title.ToLower().Contains(search.ToLower())).ToList(); // Filtering
+            }
+            else
+            {
+                books = books.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
             }
 
-            books = books.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
 
             var mapper = new Mapper(config);
 
