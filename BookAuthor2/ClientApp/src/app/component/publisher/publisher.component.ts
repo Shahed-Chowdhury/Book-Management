@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Component, OnInit } from '@angular/core';
 import { faInfoCircle, faPenNib, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -16,10 +17,17 @@ export class PublisherComponent implements OnInit {
   faInfo = faInfoCircle;
   faPenNib = faPenNib;
   faCross = faTrash;
+  searchField!: string
+  page!: number;
 
-  constructor(private apiservice: ApiService) {}
+  constructor(private apiservice: ApiService, private activatedRoute:ActivatedRoute, private router:Router) {}
 
   ngOnInit(): void {
+
+    this.activatedRoute.queryParamMap.subscribe(param => {
+      ! Number(param.get('page')) ? this.router.navigate(['/']) : this.page = Number(param.get('page'))
+    })
+
     this.apiservice.getAllPublishers({page:1, pageSize: 10, search: ''}).subscribe(res => {
       this.publishers = res
       this.publishers = this.publishers.data
@@ -33,8 +41,19 @@ export class PublisherComponent implements OnInit {
     });
   }
 
-  searchField!: string
-
-  search(){}
+  // searches using the searchbox
+  search(){
+    this.apiservice.getAllPublishers({page:this.page, pageSize: 10, search: this.searchField}).subscribe(res => {
+      this.publishers = res
+      this.publishers = this.publishers.data
+      this.spinner = false
+      this.pageLoadSuccess = true;
+    },
+    err => {
+      console.log(err);
+      this.pageLoadSuccess = false
+      this.spinner = false
+    });
+  }
 
 }
