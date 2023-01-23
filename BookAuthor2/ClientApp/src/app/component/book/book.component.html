@@ -20,19 +20,19 @@
 
             <div *ngIf="loadPage == true && spinner == false">
                 
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
-                            <td>Title</td>
-                            <td>Type</td>
-                            <td>Info</td>
-                            <td>Edit</td>
-                            <td>Delete</td>
+                            <th scope="col">Title</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Info</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let book of books.data">
-                            <td>{{book.title}}</td>
+                        <tr *ngFor="let book of books.data" >
+                            <td class="p-3">{{book.title}}</td>
                             <td>{{genre[book.type]}}</td>
                             <td><a [routerLink]="['/book/details', book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
                             <td><a [routerLink]="['/book/edit', book.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
