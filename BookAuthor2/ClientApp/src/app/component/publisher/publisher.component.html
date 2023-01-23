@@ -17,7 +17,7 @@
         <div *ngIf="pageLoadSuccess===true && spinner===false">
             <div class="row">
                 <div class="col-lg-6">
-                    <h1 class="text-center p-5">Pagination button</h1>
+                    <app-pagination-button [page]="page" [nextCount]="totalCount" [parent]="'publisher'"></app-pagination-button>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center justify-content-center">
                     <input type="text" placeholder="Search.." class="p-2 w-50" (keyup)="search()" [(ngModel)]="searchField">

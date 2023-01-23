@@ -19,6 +19,7 @@ export class PublisherComponent implements OnInit {
   faCross = faTrash;
   searchField!: string
   page!: number;
+  totalCount!: number
 
   constructor(private apiservice: ApiService, private activatedRoute:ActivatedRoute, private router:Router) {}
 
@@ -26,11 +27,16 @@ export class PublisherComponent implements OnInit {
 
     this.activatedRoute.queryParamMap.subscribe(param => {
       ! Number(param.get('page')) ? this.router.navigate(['/']) : this.page = Number(param.get('page'))
+      this.getAllPublishers();
     })
+  }
 
-    this.apiservice.getAllPublishers({page:1, pageSize: 10, search: ''}).subscribe(res => {
+  getAllPublishers()
+  {
+    this.apiservice.getAllPublishers({page:this.page, pageSize: 10, search: ''}).subscribe(res => {
       this.publishers = res
       this.publishers = this.publishers.data
+      this.totalCount = this.publishers[0].count
       this.spinner = false
       this.pageLoadSuccess = true;
     },
@@ -55,5 +61,4 @@ export class PublisherComponent implements OnInit {
       this.spinner = false
     });
   }
-
 }

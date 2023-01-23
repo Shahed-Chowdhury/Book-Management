@@ -19,6 +19,8 @@ namespace BLL.Services
         {
             var data = DataAccessFactory.PublisherDataAccess().Get();
 
+            var count = data.Count();
+
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Publisher, PublisherDTO3>();
@@ -31,9 +33,16 @@ namespace BLL.Services
             {
                 data = data.Where(p => p.Name.ToLower().Contains(dto.search.ToLower())).ToList();
             }
+            
             data = data.Skip(dto.pageSize * (dto.page - 1)).Take(dto.pageSize).ToList();
 
-            return mapper.Map<List<PublisherDTO3>>(data);
+            
+
+            var ret = mapper.Map<List<PublisherDTO3>>(data);
+
+            ret.ForEach(val => val.Count = count);
+
+            return ret;
         }
 
         // save authors
