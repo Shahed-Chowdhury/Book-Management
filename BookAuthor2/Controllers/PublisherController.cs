@@ -23,13 +23,13 @@ namespace BookAuthor2.Controllers
             }
         }
 
-        // ----------------------------------------------- Get all authors -------------------------------------------------
+        // ----------------------------------------------- Get all publishers -------------------------------------------------
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] RouteParamsDTO dto)
         {
             try
             {
-                return Ok(new { status = "success", data = PublisherServices.Get() });
+                return Ok(new { status = "success", data = PublisherServices.Get(dto) });
 
             }
             catch (Exception ex)

@@ -1,9 +1,13 @@
+import QueryParams  from './interfaces/QueryParams'
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class ApiService {
 
   private headers : HttpHeaders;
@@ -38,5 +42,10 @@ export class ApiService {
   deleteBook(id: Number) { return this.httpclient.delete(`${this.Api_URL}/book/${id}`)}
 
   editBook(data: any) {return this.httpclient.patch(`${this.Api_URL}/book`, data, {headers: this.headers})}
+
+  // Publishers
+  getAllPublishers(params: QueryParams) {
+    return this.httpclient.get(`${this.Api_URL}/publisher?pageSize=${params.pageSize}&page=${params.page}&search=${params.search}`)
+  }
 
 }

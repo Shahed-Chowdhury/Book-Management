@@ -21,6 +21,7 @@ import { DetailsComponent as BookDetailsComponent } from './component/book/detai
 import { PaginationButtonComponent } from './component/pagination-button/pagination-button.component';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { PublisherComponent } from './component/publisher/publisher.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     PaginationButtonComponent,
     SpinnerComponent,
     SidebarComponent,
+    PublisherComponent,
   ],
 
   imports: [
@@ -59,6 +61,7 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
       {path: 'book/details/:id', component: BookDetailsComponent},
       {path: 'book/delete/:id', component: BookDeleteComponent},
       {path: 'book/edit/:id', component: BookEditComponent},
+      {path: 'publishers', component: PublisherComponent},
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
     ]),
     FontAwesomeModule,

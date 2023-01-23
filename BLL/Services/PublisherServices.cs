@@ -8,13 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BLL.Services
 {
     public class PublisherServices
     {
-        // returns all authors
-        public static List<PublisherDTO3> Get()
+        // returns all publishers
+        public static List<PublisherDTO3> Get(RouteParamsDTO dto)
         {
             var data = DataAccessFactory.PublisherDataAccess().Get();
 
@@ -25,6 +26,12 @@ namespace BLL.Services
             });
 
             var mapper = new Mapper(config);
+
+            if(dto.search != null)
+            {
+                data = data.Where(p => p.Name.ToLower().Contains(dto.search.ToLower())).ToList();
+            }
+            data = data.Skip(dto.pageSize * (dto.page - 1)).Take(dto.pageSize).ToList();
 
             return mapper.Map<List<PublisherDTO3>>(data);
         }
