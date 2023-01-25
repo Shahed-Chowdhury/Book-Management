@@ -57,4 +57,10 @@ export class ApiService {
   // get a publisher
   getPublisher(id: number) { return this.httpclient.get(`${this.Api_URL}/publisher/${id}`) }
 
+  // update publisher
+  updatePublisher(data: any) { return this.httpclient.patch(`${this.Api_URL}/publisher/edit`, data, {headers: this.headers}) }
+
+  // delete publisher
+  deletePublisher(id: number) { return this.httpclient.delete(`${this.Api_URL}/publisher/${id}`)}
+
 }
