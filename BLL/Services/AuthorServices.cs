@@ -73,19 +73,19 @@ namespace BLL.Services
             return null;
         }
 
-        public static AuthorDTO3 Update(AuthorDTO3 dto)
+        public static AuthorDTOs Update(AuthorDTOs dto)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Author, AuthorDTO3>();
-                cfg.CreateMap<AuthorDTO3, Author>();
+                cfg.CreateMap<Author, AuthorDTOs>();
+                cfg.CreateMap<AuthorDTOs, Author>();
             });
 
             var mapper = new Mapper(config);
 
             var dbObj = DataAccessFactory.AuthorDataAccess().Update(mapper.Map<Author>(dto));
 
-            return mapper.Map<AuthorDTO3>(dbObj);
+            return mapper.Map<AuthorDTOs>(dbObj);
         }
     }
 }

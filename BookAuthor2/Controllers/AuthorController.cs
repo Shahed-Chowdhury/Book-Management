@@ -40,7 +40,7 @@ namespace BookAuthor2.Controllers
         }
 
         [HttpPatch("update")]
-        public IActionResult Update(AuthorDTO3 dto)
+        public IActionResult Update(AuthorDTOs dto)
         {
             try
             {

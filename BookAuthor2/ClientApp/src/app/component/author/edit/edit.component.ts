@@ -13,6 +13,11 @@ export class EditComponent implements OnInit {
 
   authorId!: Number;
   author: any;
+  authorName!: string
+  authorDOB!: string 
+  authorBio!: string
+  bookId!: number
+  spinner: boolean = false
 
   constructor(
     private apiservice: ApiService,
@@ -31,20 +36,27 @@ export class EditComponent implements OnInit {
   public getAuthorDetails(id: Number){
     this.apiservice.getOnlyAuthorsById(id).subscribe(result => {
       this.author = result
+      this.authorName = this.author.data.name
+      this.authorDOB = this.author.data.dob.split('T')[0]
+      this.authorBio = this.author.data.shortBio
+      this.bookId = this.author.data.bookId
     });
   }
 
   public EditAuthor(){
-    const name = (<HTMLInputElement>document.querySelector("#AuthorName")).value
-    const data = {Id: this.authorId, Name: name}
+    this.spinner = true
+    const data = {
+      Id: this.authorId,
+      Name: this.authorName,
+      DOB: this.authorDOB,
+      shortBio: this.authorBio,
+      BookId: this.bookId
+    }
+
     this.apiservice.editAuthor(data).subscribe(response => {
       this.author = response
       this.author.status == "success" ? alert("Updated successfully") : alert("Failed to update")
+      this.spinner = false
     });
-
   }
-
-
-
-
 }
