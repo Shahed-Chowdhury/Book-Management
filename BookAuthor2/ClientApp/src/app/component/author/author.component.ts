@@ -23,8 +23,9 @@ export class AuthorComponent implements OnInit {
 
     public getAllAuthors()
     {
-        this.apiservice.getAuthors().subscribe(result=>this.authors=result)
+        this.apiservice.getAuthors().subscribe(res => {
+          this.authors = res
+          this.authors = this.authors.data
+        })
     }
-
-   
 }

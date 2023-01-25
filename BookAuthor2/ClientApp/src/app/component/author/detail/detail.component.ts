@@ -28,11 +28,10 @@ export class AuthorDetailComponent implements OnInit {
 
   public getAuthorsById(authorId:Number)
   {
-      this.apiservice.getAuthorsDetailsWithBooks(authorId).subscribe(result=>{
+      this.apiservice.getOnlyAuthorsById(authorId).subscribe(result=>{
         this.author=result
-
-        this.author.data == null ? this.router.navigate(['/authors']) : console.log(this.author.data.books)
+        // this.author.data == null ? this.router.navigate(['/authors']) : console.log(this.author.data.books)
+        console.log(this.author);
       })   
   }
-
 }

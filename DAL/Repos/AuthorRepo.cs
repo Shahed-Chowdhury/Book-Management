@@ -44,7 +44,18 @@ namespace DAL.Repos
 
         public Author Get(int id)
         {
-            return _context.Authors.Where(x => x.Id == id).FirstOrDefault();
+            //return _context.Authors.Where(x => x.Id == id).FirstOrDefault();
+            var ret =  _context.Authors.Select(a => new Author
+            {
+                Id = a.Id,
+                Name = a.Name,
+                DOB = a.DOB,
+                shortBio = a.shortBio,
+                BookId = a.BookId,
+                Book = a.Book,
+            });
+
+            return ret.Where(x=>x.Id == id).FirstOrDefault();
         }
 
         public Author Update(Author c)

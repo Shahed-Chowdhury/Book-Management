@@ -1,5 +1,15 @@
 <div class="container">
-    <h1 class="p-5 text-center">{{author.data.name}}</h1>  
+
+    <h1 class="p-2">{{author.data.name}}</h1>  
+    
+    <div class="bio p-2">
+        <p><b>Bio:</b> {{author.data.shortBio}} </p>
+    </div>
+
+    <div class="dob p-2">
+        <p><b>Date of birth:</b> {{author.data.dob.split("T")[0].split("-").reverse().join('-')}} </p>
+    </div>
+
     <div class="row mb-5">
         <div class="col-lg-6">
             <a [routerLink]="['/author/edit', authorId]" class="btn btn-primary w-100 p-3">Edit Author</a>
@@ -18,10 +28,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let items of author.data.books">
-                <td>{{items.title}}</td>
-                <td>{{genre[items.type]}}</td>
-                <td><a [routerLink]="['/author/edit', items.Id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+            <tr>
+                <td>{{author.data.book.title}}</td>
+                <td>{{genre[author.data.book.type]}}</td>
+                <td><a [routerLink]="['/book/details', author.data.book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
             </tr>
         </tbody>
     </table>
