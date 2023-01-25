@@ -65,7 +65,7 @@ export class EditComponent implements OnInit {
 
   getPublishers()
   {
-    this.apiservice.getPublishers().subscribe(res => {
+    this.apiservice.getPublishersNoPage().subscribe(res => {
       var resp:any = res
       this.publishers = resp.data
     })

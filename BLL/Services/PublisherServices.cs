@@ -14,7 +14,7 @@ namespace BLL.Services
 {
     public class PublisherServices
     {
-        // returns all publishers
+        // returns all publishers with paging 
         public static List<PublisherDTO3> Get(RouteParamsDTO dto)
         {
             var data = DataAccessFactory.PublisherDataAccess().Get();
@@ -37,6 +37,30 @@ namespace BLL.Services
             data = data.Skip(dto.pageSize * (dto.page - 1)).Take(dto.pageSize).ToList();
 
             
+
+            var ret = mapper.Map<List<PublisherDTO3>>(data);
+
+            ret.ForEach(val => val.Count = count);
+
+            return ret;
+        }
+
+
+        // returns all publishers
+        public static List<PublisherDTO3> GetWithNoPaging()
+        {
+            var data = DataAccessFactory.PublisherDataAccess().Get();
+
+            var count = data.Count();
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Publisher, PublisherDTO3>();
+
+            });
+
+            var mapper = new Mapper(config);
+
 
             var ret = mapper.Map<List<PublisherDTO3>>(data);
 

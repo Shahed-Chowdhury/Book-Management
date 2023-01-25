@@ -38,6 +38,20 @@ namespace BookAuthor2.Controllers
             }
         }
 
+        [HttpGet("np")]
+        public IActionResult GetWithNoPaging()
+        {
+            try
+            {
+                return Ok(new { status = "success", data = PublisherServices.GetWithNoPaging() });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
+
         // ----------------------------------------------- Get all authors -------------------------------------------------
         [HttpGet("{id}")]
         public IActionResult Get(int id)

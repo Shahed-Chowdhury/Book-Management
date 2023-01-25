@@ -28,23 +28,14 @@ export class AddComponent implements OnInit {
 
   getPublishers()
   {
-    this.apiservice.getPublishers().subscribe(res => {
+    this.apiservice.getPublishersNoPage().subscribe(res => {
       var resp:any = res
       this.publishers = resp.data
     })
   }
 
-  // getAuthor()
-  // {
-  //   this.apiservice.getAuthors().subscribe(res => {
-  //     this.authors = res;
-  //     console.log(this.authors)
-  //   })
-  // }
-
   addBook()
   {
-
     const data = {
       "Title": this.title,
       "Type": Number(this.genreId),

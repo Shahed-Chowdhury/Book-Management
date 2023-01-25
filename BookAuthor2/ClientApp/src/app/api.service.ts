@@ -21,6 +21,8 @@ export class ApiService {
 
   getPublishers() {return this.httpclient.get(`${this.Api_URL}/publisher`)}
 
+  getPublishersNoPage() {return this.httpclient.get(`${this.Api_URL}/publisher/np`)}
+
   addAuthor(data: any) {return this.httpclient.post(`${this.Api_URL}/author/add`, data, {headers: this.headers}) }
 
   getAuthors(){ return this.httpclient.get(`${this.Api_URL}/author`)}
