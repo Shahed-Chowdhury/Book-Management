@@ -43,9 +43,19 @@ export class ApiService {
 
   editBook(data: any) {return this.httpclient.patch(`${this.Api_URL}/book`, data, {headers: this.headers})}
 
-  // Publishers
-  getAllPublishers(params: QueryParams) {
+  // ------------------------------------------ Publisher services ----------------------------------------------------------
+
+  // get all publishers
+  getAllPublishers(params: QueryParams)
+  {
     return this.httpclient.get(`${this.Api_URL}/publisher?pageSize=${params.pageSize}&page=${params.page}&search=${params.search}`)
   }
+
+  // add publisher
+  addPublisher(data: object)
+  {
+    return this.httpclient.post(`${this.Api_URL}/publisher/add`, data, {headers: this.headers})
+  }
+
 
 }
