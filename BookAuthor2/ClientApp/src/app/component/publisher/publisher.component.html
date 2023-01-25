@@ -37,9 +37,9 @@
                 <tbody>
                     <tr scope="row" *ngFor="let publisher of publishers">
                         <td class="p-3">{{publisher.name}}</td>
-                        <td><a href=""><fa-icon [icon]="faInfo"></fa-icon></a></td>
-                        <td><a href=""><fa-icon [icon]="faPenNib"></fa-icon></a></td>
-                        <td><a href=""><fa-icon [icon]="faCross"></fa-icon></a></td>
+                        <td><a href="" [routerLink]="['/publisher/details/', publisher.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+                        <td><a href="" [routerLink]="['/publisher/edit/', publisher.id]"><fa-icon [icon]="faPenNib"></fa-icon></a></td>
+                        <td><a href="" [routerLink]="['/publisher/delete/', publisher.id]"><fa-icon [icon]="faCross"></fa-icon></a></td>
                     </tr>
                 </tbody>
             </table>

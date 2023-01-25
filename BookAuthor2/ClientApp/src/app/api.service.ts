@@ -52,10 +52,9 @@ export class ApiService {
   }
 
   // add publisher
-  addPublisher(data: object)
-  {
-    return this.httpclient.post(`${this.Api_URL}/publisher/add`, data, {headers: this.headers})
-  }
+  addPublisher(data: object) { return this.httpclient.post(`${this.Api_URL}/publisher/add`, data, {headers: this.headers}) }
 
+  // get a publisher
+  getPublisher(id: number) { return this.httpclient.get(`${this.Api_URL}/publisher/${id}`) }
 
 }

@@ -23,6 +23,9 @@ import { SpinnerComponent } from './component/spinner/spinner.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { PublisherComponent } from './component/publisher/publisher.component';
 import { AddComponent as PublisherAddComponent } from './component/publisher/add/add.component';
+import { InfoComponent as PublisherDetailComponent } from './component/publisher/info/info.component';
+import { EditComponent as PublisherEditComponent } from './component/publisher/edit/edit.component';
+import { DeleteComponent as PublisherDeleteComponent } from './component/publisher/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { AddComponent as PublisherAddComponent } from './component/publisher/add
     SidebarComponent,
     PublisherComponent,
     PublisherAddComponent,
+    PublisherDetailComponent,
+    PublisherEditComponent,
+    PublisherDeleteComponent,
   ],
 
   imports: [
@@ -53,19 +59,27 @@ import { AddComponent as PublisherAddComponent } from './component/publisher/add
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
+
       {path: 'author/add', component: AuthorAddComponent},
       {path: 'authors', component: AuthorComponent },
       {path: 'author/details/:id', component: AuthorDetailComponent},
       {path: 'author/edit/:id', component: AuthorEditComponent},
       {path: 'author/delete/:id', component: AuthorDeleteComponent},
+
       {path: 'books', component: BookComponent},
       {path: 'book/add', component: BookAddComponent},
       {path: 'book/details/:id', component: BookDetailsComponent},
       {path: 'book/delete/:id', component: BookDeleteComponent},
       {path: 'book/edit/:id', component: BookEditComponent},
+
       {path: 'publishers', component: PublisherComponent},
       {path: 'publisher/add', component: PublisherAddComponent},
+      {path: 'publisher/details/:id', component: PublisherDetailComponent},
+      {path: 'publisher/edit/:id', component: PublisherEditComponent},
+      {path: 'publisher/delete/:id', component: PublisherDeleteComponent},
+
       {path: '**', pathMatch: 'full', component: PageNotFoundComponent}
+      
     ]),
     FontAwesomeModule,
     FormsModule
