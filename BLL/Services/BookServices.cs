@@ -28,7 +28,7 @@ namespace BLL.Services
 
             var book = DataAccessFactory.BookDataAccess().Add(dataObj);
 
-            var bookDTO = mapper.Map<BookDTO>(dto);
+            var bookDTO = mapper.Map<BookDTO>(book);
 
             return bookDTO;
         }
@@ -41,7 +41,7 @@ namespace BLL.Services
                 cfg.CreateMap<Author, AuthorDTO2>();
             });
 
-            var books = DataAccessFactory.BookDataAccess().Get(page, pageSize);
+            var books = DataAccessFactory.BookDataAccess().Get(page, pageSize).OrderByDescending(x => x.Id).ToList();
 
             int totalCount = books.Count();
 

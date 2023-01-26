@@ -26,7 +26,7 @@ export class ApiService {
   addAuthor(data: any) {return this.httpclient.post(`${this.Api_URL}/author/add`, data, {headers: this.headers}) }
 
   getAllAuthors(){
-    return this.httpclient.get(`${this.Api_URL}/author`
+    return this.httpclient.get(`${this.Api_URL}/author/np`
   )}
 
   getAuthors(params: QueryParams){

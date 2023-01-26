@@ -28,6 +28,26 @@ namespace BLL.Services
             return mapper.Map<AuthorDTOs>(obj);
         }
 
+        public static List<AuthorDTO3> GetNP()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Author, AuthorDTO3>();
+            });
+
+            var mapper = new Mapper(config);
+
+            var data = DataAccessFactory.AuthorDataAccess().Get();
+
+            var count = data.Count();
+
+            var dtoObj = mapper.Map<List<AuthorDTO3>>(data);
+
+            dtoObj.ForEach(obj => obj.Count = count);
+
+            return dtoObj;
+        }
+
         public static List<AuthorDTO3> Get(RouteParamsDTO dto)
         {
             var config = new MapperConfiguration(cfg =>

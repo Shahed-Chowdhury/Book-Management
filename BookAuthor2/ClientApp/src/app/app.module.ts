@@ -26,6 +26,7 @@ import { AddComponent as PublisherAddComponent } from './component/publisher/add
 import { InfoComponent as PublisherDetailComponent } from './component/publisher/info/info.component';
 import { EditComponent as PublisherEditComponent } from './component/publisher/edit/edit.component';
 import { DeleteComponent as PublisherDeleteComponent } from './component/publisher/delete/delete.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -54,12 +55,12 @@ import { DeleteComponent as PublisherDeleteComponent } from './component/publish
   ],
 
   imports: [
+    NgSelectModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-
       {path: 'author/add', component: AuthorAddComponent},
       {path: 'authors', component: AuthorComponent },
       {path: 'author/details/:id', component: AuthorDetailComponent},
@@ -82,8 +83,7 @@ import { DeleteComponent as PublisherDeleteComponent } from './component/publish
       
     ]),
     FontAwesomeModule,
-    FormsModule
-    
+    FormsModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,7 +17,7 @@ namespace BLL.Services
         // returns all publishers with paging 
         public static List<PublisherDTO3> Get(RouteParamsDTO dto)
         {
-            var data = DataAccessFactory.PublisherDataAccess().Get();
+            var data = DataAccessFactory.PublisherDataAccess().Get().OrderByDescending(x => x.Id).ToList();
 
             var count = data.Count();
 

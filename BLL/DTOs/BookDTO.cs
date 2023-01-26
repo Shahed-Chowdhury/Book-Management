@@ -11,6 +11,7 @@ namespace BLL.DTOs
 {
     public class BookDTO
     {
+        [Required]
         public int Id { get; set; }
 
         [Required]

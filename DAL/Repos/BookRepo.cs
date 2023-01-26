@@ -1,4 +1,5 @@
-﻿using DAL.EF.Models;
+﻿using Azure;
+using DAL.EF.Models;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,10 +36,9 @@ namespace DAL.Repos
             if (_context.SaveChanges() > 0) return book;
 
             return null;
-
         }
 
-        public List<Book> Get(int page = 1, int pageSize = 10)
+        public List<Book> Get(int page, int pageSize)
         {
             var returnObject = _context.Books.Select(n => new Book
             {

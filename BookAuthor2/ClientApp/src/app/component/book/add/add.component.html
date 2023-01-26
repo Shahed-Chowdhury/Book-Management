@@ -1,8 +1,7 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-50">
-    <div>
+    <div class="inner-book-add">
         <h1 class="p-5">Add Book</h1>
         <form>
-
             <div class="name">
                 <label for="Name">Title:</label>&nbsp;
                 <input type="text" name="Name" id="BookName" class="p-2 w-100" [(ngModel)]="title">
@@ -38,12 +37,19 @@
                     </option>
                 </select>
             </div>
-            
-            <!-- <div class="author shadow mt-3 mb-3" (click)=""
-                >
-                    <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
-                    Add author
-                </div> -->
+
+            <div class="authors mt-3">
+                <label for="authors">Authors:</label>&nbsp;
+                <ng-select
+                    [items]="authors"
+                    bindLabel="name"
+                    bindValue="id"
+                    [multiple]="true"
+                    (change)="selectedAuthors($event)"
+                    [closeOnSelect]="false"
+                    placeholder="Select authors"
+                ></ng-select>
+            </div>
 
             <div class="button mb-5">
                 <br>

@@ -52,6 +52,19 @@ namespace BookAuthor2.Controllers
             }
         }
 
+        [HttpGet("np")]
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(new { status = "success", data = AuthorServices.GetNP() });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult Get([FromQuery] RouteParamsDTO dto)
         {
