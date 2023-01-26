@@ -41,7 +41,7 @@ export class PaginationButtonComponent implements OnInit {
     {
       if (this.parent === 'book') { this.router.navigate(['books'], {queryParams: {page: 1}});}
       else if (this.parent === 'publisher') { this.router.navigate(['publishers'], {queryParams: {page: 1}}); }
-      else if (this.parent === 'book') { this.router.navigate(['books'], {queryParams: {page: 1}}); }
+      else if (this.parent === 'author') { this.router.navigate(['authors'], {queryParams: {page: 1}}); }
 
       this.currentPageNo = 1;
       (<HTMLButtonElement>document.getElementById("backBtn")).setAttribute("disabled", "")
@@ -66,6 +66,10 @@ export class PaginationButtonComponent implements OnInit {
     else if(this.parent === 'publisher')
     {
       this.router.navigate(['/publishers'], {queryParams: {page: this.currentPageNo}})
+    }
+    else if(this.parent === 'author')
+    {
+      this.router.navigate(['/authors'], {queryParams: {page: this.currentPageNo}})
     }
   }
 
@@ -92,6 +96,10 @@ export class PaginationButtonComponent implements OnInit {
       else if (this.parent === 'publisher')
       {
         this.router.navigate(['/publishers'], {queryParams: {page: this.currentPageNo}})
+      }
+      else if (this.parent === 'author')
+      {
+        this.router.navigate(['/authors'], {queryParams: {page: this.currentPageNo}})
       }
     }
   }

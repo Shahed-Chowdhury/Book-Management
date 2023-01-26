@@ -18,7 +18,6 @@ export class DeleteComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((param)=>{
-      
       !Number(param.get('id')) ? this.router.navigate(['/authors']) : this.authorId = Number(param.get('id'));
     })
 

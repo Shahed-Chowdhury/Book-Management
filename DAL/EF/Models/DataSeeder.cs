@@ -32,6 +32,8 @@ namespace DAL.EF.Models
                 bookManagementContext.Publishers.AddRange(publishers);
             };
 
+            
+
             if (!bookManagementContext.Books.Any())
             {
                 var books = new List<Book>();
@@ -42,11 +44,13 @@ namespace DAL.EF.Models
                     book.Type = (BookType)rnd.Next(0,3);
                     book.Description = Guid.NewGuid().ToString();
                     book.Price = rnd.Next(1000, 10000);
-                    book.PublisherId = rnd.Next(8, 108);
+                    book.PublisherId = rnd.Next(0,100);
                     books.Add(book);
                 }
                 bookManagementContext.Books.AddRange(books);
-            };
+            }; 
+
+            
 
             if(!bookManagementContext.Authors.Any())
             {
@@ -58,12 +62,14 @@ namespace DAL.EF.Models
                     author.Name = "author" + i;
                     author.DOB = DateTime.Now;
                     author.shortBio = Guid.NewGuid().ToString();
-                    author.BookId = rnd.Next(13,113);
+                    author.BookId = null;
                     authors.Add(author);
                 }
 
                 bookManagementContext.Authors.AddRange(authors);
             }
+
+            
 
             bookManagementContext.SaveChanges();
         }

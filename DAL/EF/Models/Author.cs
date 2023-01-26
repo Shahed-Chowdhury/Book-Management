@@ -21,8 +21,8 @@ namespace DAL.EF.Models
 
         public string? shortBio { get; set; }
 
-        [Required, ForeignKey("Book")]
-        public int BookId { get; set; }
-        public Book Book { get; set; }
+        [ForeignKey("Book")]
+        public int? BookId { get; set; }
+        public Book? Book { get; set; }
     }
 }

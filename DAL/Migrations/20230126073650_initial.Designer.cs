@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BookManagementContext))]
-    [Migration("20230115065103_updatedBookTableAndAuthorTable")]
-    partial class updatedBookTableAndAuthorTable
+    [Migration("20230126073650_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,8 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookId")
+                    b.Property<int?>("BookId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DOB")
@@ -50,7 +51,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Author");
+                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("DAL.EF.Models.Book", b =>

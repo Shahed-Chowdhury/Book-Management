@@ -39,7 +39,7 @@ export class EditComponent implements OnInit {
       this.authorName = this.author.data.name
       this.authorDOB = this.author.data.dob.split('T')[0]
       this.authorBio = this.author.data.shortBio
-      this.bookId = this.author.data.bookId
+      this.bookId = this.author.data.bookId == 0 ? null : this.author.data.bookId
     });
   }
 

@@ -53,11 +53,11 @@ namespace BookAuthor2.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] RouteParamsDTO dto)
         {
             try
             {
-                return Ok(new { status = "success", data = AuthorServices.Get() });
+                return Ok(new { status = "success", data = AuthorServices.Get(dto) });
             }
             catch(Exception ex)
             {

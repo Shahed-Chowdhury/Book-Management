@@ -58,7 +58,7 @@ export class EditComponent implements OnInit {
 
   getAuthors()
   {
-    this.apiservice.getAuthors().subscribe(res => {
+    this.apiservice.getAllAuthors().subscribe(res => {
       this.authors = res;
     })
   }

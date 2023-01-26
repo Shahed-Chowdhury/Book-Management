@@ -20,8 +20,7 @@ namespace BLL.DTOs
 
         public string? shortBio { get; set; }
 
-        [Required]
-        public int BookId { get; set; }
+        public int? BookId { get; set; }
 
     }
 
@@ -41,6 +40,8 @@ namespace BLL.DTOs
         
         [Required]
         public string Name { get; set; }
+
+        public int Count { get; set; }
 
         [Required]
         public DateTime DOB { get; set; }

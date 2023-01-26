@@ -28,7 +28,7 @@ namespace BLL.Services
             return mapper.Map<AuthorDTOs>(obj);
         }
 
-        public static List<AuthorDTO3> Get()
+        public static List<AuthorDTO3> Get(RouteParamsDTO dto)
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -37,9 +37,24 @@ namespace BLL.Services
 
             var mapper = new Mapper(config);
 
-            var obj = DataAccessFactory.AuthorDataAccess().Get();
+            var data = DataAccessFactory.AuthorDataAccess().Get();
 
-            return mapper.Map<List<AuthorDTO3>>(obj);
+            var count = data.Count();
+
+            data = data.OrderByDescending(s => s.Id).ToList();
+
+            if (dto.search != null)
+            {
+                data = data.Where(p => p.Name.ToLower().Contains(dto.search.ToLower())).ToList();
+            }
+
+            data = data.Skip(dto.pageSize * (dto.page - 1)).Take(dto.pageSize).ToList();
+
+            var dtoObj = mapper.Map<List<AuthorDTO3>>(data);
+
+            dtoObj.ForEach(obj => obj.Count = count);
+
+            return dtoObj;
         }
 
         public static AuthorDTO3 Get(int id)

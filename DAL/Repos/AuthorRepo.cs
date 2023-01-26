@@ -17,7 +17,6 @@ namespace DAL.Repos
             if(_context.SaveChanges() > 0) return c;
 
             return null;
-            
         }
 
         public Author Delete(int id)
