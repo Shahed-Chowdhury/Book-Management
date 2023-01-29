@@ -44,7 +44,25 @@
                 </select>
             </div>
 
-            <div class="authors mt-3 mb-3">
+            <div class="authors mt-3">
+                <label for="authors">Authors:</label>&nbsp;
+                <ng-select
+                    [items]="allAuthors"
+                    bindLabel="name"
+                    bindValue="id"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    name="authorList"
+                    placeholder="Select authors"
+                    [(ngModel)]="authors"
+                >
+                    <ng-template ng-option-tmp let-item="item" let-index="index">
+                        <b>{{ item.name }}</b>
+                    </ng-template>
+                </ng-select>
+            </div>
+
+            <!-- <div class="authors mt-3 mb-3">
                 <p>Authors:</p>
                 <div class="author-available"  *ngIf="totalAuthors > 0">
                     <div class="author shadow"
@@ -64,7 +82,7 @@
                     <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
                     Add author
                 </div>
-            </div>
+            </div> -->
             <div class="button">
                 <br>
                 <button class="btn btn-primary w-100 p-2" (click)="editBook()">Update Book</button>

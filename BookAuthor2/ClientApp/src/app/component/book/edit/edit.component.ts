@@ -30,6 +30,8 @@ export class EditComponent implements OnInit {
   publisherId!: number
   authors: any
   totalAuthors!: number
+  allAuthors!: any
+  selectedAuthorIds: Array<string> = []
 
   constructor(private apiservice: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -39,6 +41,7 @@ export class EditComponent implements OnInit {
     })
     this.getBookDetails(this.bookId)
     this.getPublishers()
+    this.getAuthors()
   }
 
   getBookDetails(id: Number)
@@ -52,14 +55,21 @@ export class EditComponent implements OnInit {
       this.publishedDate = this.bookDetails.data.publishedDate.split('T')[0]
       this.publisherId = this.bookDetails.data.publisher.id
       this.authors = this.bookDetails.data.authors
-      this.totalAuthors = this.authors.length      
+      this.totalAuthors = this.authors.length   
+      
+      for(let i=0; i<this.authors.length; i++)
+      {
+        this.selectedAuthorIds.push(String(this.authors[i].id))
+      }
+      
     })
   }
 
   getAuthors()
   {
     this.apiservice.getAllAuthors().subscribe(res => {
-      this.authors = res;
+      this.allAuthors = res;
+      this.allAuthors = this.allAuthors.data;
     })
   }
 
@@ -119,6 +129,11 @@ export class EditComponent implements OnInit {
   addAuthor()
   {
     this.router.navigate(['/author/add'], {queryParams: {bookId: this.bookId}})
+  }
+
+  compareFn(item:any, selected:any)
+  {
+    console.log(item);
   }
 }
 
