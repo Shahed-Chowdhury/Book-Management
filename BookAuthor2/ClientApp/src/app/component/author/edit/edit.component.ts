@@ -57,6 +57,7 @@ export class EditComponent implements OnInit {
       this.author = response
       this.author.status == "success" ? alert("Updated successfully") : alert("Failed to update")
       this.spinner = false
+      this.router.navigate(['/authors'], {queryParams: {page:1}})
     });
   }
 }

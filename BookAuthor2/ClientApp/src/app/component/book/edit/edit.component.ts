@@ -56,11 +56,15 @@ export class EditComponent implements OnInit {
       this.publisherId = this.bookDetails.data.publisher.id
       this.authors = this.bookDetails.data.authors
       this.totalAuthors = this.authors.length   
+      console.log(this.authors);
       
+      var selectedAuthorIdsTemp = []
       for(let i=0; i<this.authors.length; i++)
       {
-        this.selectedAuthorIds.push(String(this.authors[i].id))
+        selectedAuthorIdsTemp.push(this.authors[i].id)
       }
+
+      this.selectedAuthorIds = selectedAuthorIdsTemp;
       
     })
   }
@@ -70,6 +74,7 @@ export class EditComponent implements OnInit {
     this.apiservice.getAllAuthors().subscribe(res => {
       this.allAuthors = res;
       this.allAuthors = this.allAuthors.data;
+      console.log(this.allAuthors);
     })
   }
 
@@ -94,7 +99,8 @@ export class EditComponent implements OnInit {
     }
 
     this.apiservice.editBook(data).subscribe(res => {
-      alert("Book updated successfully")
+      alert("Successfully updated")
+      this.router.navigate(['/books'], {queryParams: {page: 1}})
     },err => {
       alert("Error")
       console.log(err)
