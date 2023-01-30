@@ -48,7 +48,7 @@ namespace DAL.Repos
                 Type = n.Type,
                 PublishedDate = n.PublishedDate,
                 Publisher = n.Publisher,
-                Authors = n.Authors
+                //Authors = n.Authors
             });
             return returnObject.ToList();
 
@@ -64,7 +64,7 @@ namespace DAL.Repos
                Type = n.Type,
                PublishedDate = n.PublishedDate,
                Publisher = n.Publisher,
-               Authors = n.Authors,
+               //Authors = n.Authors,
                Description = n.Description,
                Price = n.Price
             }).FirstOrDefault(p => p.Id == id);

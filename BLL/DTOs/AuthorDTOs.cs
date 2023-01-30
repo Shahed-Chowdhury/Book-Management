@@ -20,8 +20,6 @@ namespace BLL.DTOs
 
         public string? shortBio { get; set; }
 
-        public int? BookId { get; set; }
-
     }
 
     public class AuthorDTO2

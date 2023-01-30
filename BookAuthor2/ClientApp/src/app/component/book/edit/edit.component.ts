@@ -60,9 +60,6 @@ export class EditComponent implements OnInit {
       this.totalAuthors = this.authors.length   
       this.selectedAuthors = this.authors
 
-      console.log("authors:", this.authors);
-      console.log("selected authors:", this.selectedAuthors);
-
       var selectedAuthorIdsTemp = []
       for(let i=0; i<this.authors.length; i++)
       {
@@ -105,14 +102,13 @@ export class EditComponent implements OnInit {
     // finds if the selected author has been unselected from the authors list
     // if none has been removed it returns an empty array
     var arr = this.authors.filter((el:any) => !this.selectedAuthors.some((el2:any) => el.id === el2.id))
-    console.log("After matching authors selected with authors:", arr);
+
 
     if (arr.length > 0){
       arr.forEach((el:any)=>{
         el.bookId = null
         this.apiservice.editAuthor(el).subscribe(response => {
           var resp = response
-          console.log(resp);
         });
       })
     } 

@@ -42,7 +42,6 @@ export class AddComponent implements OnInit {
     this.apiservice.getAllAuthors().subscribe(res => {
       var resp: any = res
       this.authors = resp.data
-      console.log(this.authors);
     })
   }
 
@@ -58,25 +57,18 @@ export class AddComponent implements OnInit {
 
     this.apiservice.addBook(data).subscribe(res => {
       var resp:any = res
-      //console.log(resp.data.id)
-      console.log(this.selectedAuthor);
-
-
-      for(let author of this.selectedAuthor)
-      {
-        author.bookId = resp.data.id
-        this.apiservice.editAuthor(author).subscribe(response => {
-          var author:any = response
-          author.status == "success" ? alert("Updated successfully") : alert("Failed to update")
-        });
-      }
-  
-      
-    }, err => {
+      var bookId = resp.data.id
+      this.selectedAuthor.forEach((author:any)=>{
+        var authorId = author.id 
+        this.apiservice.addBookAuthor({"AuthorId": authorId, "BookId": bookId}).subscribe(res => {
+          this.router.navigate(["/books"], {queryParams: {page: 1}})
+        })
+      })    
+    },
+    err => {
       alert("Unable to add book"); console.log(err)
     })
   }
-
 
   selectedAuthors(event:any)
   {

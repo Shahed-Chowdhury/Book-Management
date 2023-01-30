@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BookManagementContext))]
-    [Migration("20230126073650_initial")]
+    [Migration("20230130111811_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -33,10 +33,6 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BookId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
 
@@ -48,8 +44,6 @@ namespace DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.ToTable("Authors");
                 });
@@ -91,6 +85,29 @@ namespace DAL.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("DAL.EF.Models.BookAuthorMap", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookAuthorMaps");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Publisher", b =>
                 {
                     b.Property<int>("Id")
@@ -109,17 +126,6 @@ namespace DAL.Migrations
                     b.ToTable("Publishers");
                 });
 
-            modelBuilder.Entity("DAL.EF.Models.Author", b =>
-                {
-                    b.HasOne("DAL.EF.Models.Book", "Book")
-                        .WithMany("Authors")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
                     b.HasOne("DAL.EF.Models.Publisher", "Publisher")
@@ -131,9 +137,33 @@ namespace DAL.Migrations
                     b.Navigation("Publisher");
                 });
 
+            modelBuilder.Entity("DAL.EF.Models.BookAuthorMap", b =>
+                {
+                    b.HasOne("DAL.EF.Models.Author", "Author")
+                        .WithMany("BookAuthorMaps")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.EF.Models.Book", "Book")
+                        .WithMany("BookAuthorMaps")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("DAL.EF.Models.Author", b =>
+                {
+                    b.Navigation("BookAuthorMaps");
+                });
+
             modelBuilder.Entity("DAL.EF.Models.Book", b =>
                 {
-                    b.Navigation("Authors");
+                    b.Navigation("BookAuthorMaps");
                 });
 
             modelBuilder.Entity("DAL.EF.Models.Publisher", b =>

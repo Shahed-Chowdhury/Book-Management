@@ -34,11 +34,11 @@ namespace DAL.EF.Models
         public Publisher Publisher { get; set; }
 
         [Required]
-        public ICollection<Author> Authors { get; set; }
+        public ICollection<BookAuthorMap> BookAuthorMaps { get; set; }
 
         public Book()
         {
-            Authors = new List<Author>();
+            BookAuthorMaps = new List<BookAuthorMap>();
         }
 
 

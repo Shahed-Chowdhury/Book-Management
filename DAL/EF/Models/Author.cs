@@ -21,8 +21,13 @@ namespace DAL.EF.Models
 
         public string? shortBio { get; set; }
 
-        [ForeignKey("Book")]
-        public int? BookId { get; set; }
-        public Book? Book { get; set; }
+        [Required]
+        public ICollection<BookAuthorMap> BookAuthorMaps { get; set; }
+
+        public Author()
+        {
+            BookAuthorMaps = new List<BookAuthorMap>();
+        }
+
     }
 }

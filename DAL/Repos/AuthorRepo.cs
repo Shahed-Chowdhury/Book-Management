@@ -50,8 +50,8 @@ namespace DAL.Repos
                 Name = a.Name,
                 DOB = a.DOB,
                 shortBio = a.shortBio,
-                BookId = a.BookId,
-                Book = a.Book,
+                //BookId = a.BookId,
+                //Book = a.Book,
             });
 
             return ret.Where(x=>x.Id == id).FirstOrDefault();

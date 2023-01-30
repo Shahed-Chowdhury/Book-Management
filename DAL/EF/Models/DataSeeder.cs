@@ -44,11 +44,11 @@ namespace DAL.EF.Models
                     book.Type = (BookType)rnd.Next(0,3);
                     book.Description = Guid.NewGuid().ToString();
                     book.Price = rnd.Next(1000, 10000);
-                    book.PublisherId = rnd.Next(0,100);
+                    book.PublisherId = rnd.Next(1,101);
                     books.Add(book);
                 }
                 bookManagementContext.Books.AddRange(books);
-            }; 
+            };
 
             
 
@@ -62,14 +62,11 @@ namespace DAL.EF.Models
                     author.Name = "author" + i;
                     author.DOB = DateTime.Now;
                     author.shortBio = Guid.NewGuid().ToString();
-                    author.BookId = null;
                     authors.Add(author);
                 }
 
                 bookManagementContext.Authors.AddRange(authors);
             }
-
-            
 
             bookManagementContext.SaveChanges();
         }

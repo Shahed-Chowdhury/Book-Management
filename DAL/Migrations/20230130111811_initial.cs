@@ -12,6 +12,21 @@ namespace DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Authors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    shortBio = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Authors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Publishers",
                 columns: table => new
                 {
@@ -49,21 +64,25 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Authors",
+                name: "BookAuthorMaps",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    shortBio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorId = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Authors", x => x.Id);
+                    table.PrimaryKey("PK_BookAuthorMaps", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Authors_Books_BookId",
+                        name: "FK_BookAuthorMaps_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookAuthorMaps_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
@@ -71,8 +90,13 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Authors_BookId",
-                table: "Authors",
+                name: "IX_BookAuthorMaps_AuthorId",
+                table: "BookAuthorMaps",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookAuthorMaps_BookId",
+                table: "BookAuthorMaps",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
@@ -84,6 +108,9 @@ namespace DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BookAuthorMaps");
+
             migrationBuilder.DropTable(
                 name: "Authors");
 

@@ -71,4 +71,10 @@ export class ApiService {
   // delete publisher
   deletePublisher(id: number) { return this.httpclient.delete(`${this.Api_URL}/publisher/${id}`)}
 
+  // ------------------------------------------ Book-Author services ----------------------------------------------------------
+
+  // add to book author map
+  addBookAuthor(data:any) { return this.httpclient.post(`${this.Api_URL}/bookAuthor`, data, {headers: this.headers})}
+  
+
 }
