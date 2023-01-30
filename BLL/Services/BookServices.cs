@@ -75,6 +75,7 @@ namespace BLL.Services
 
             var book = DataAccessFactory.BookDataAccess().Get(id);
 
+             
              var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Book, BookDTO5>();
                 cfg.CreateMap<Publisher, PublisherDTO2>();
@@ -83,7 +84,13 @@ namespace BLL.Services
 
             var mapper = new Mapper(config);
 
-            return mapper.Map<BookDTO5>(book); 
+            var dtoObj = mapper.Map<BookDTO5>(book);
+
+            // Fix
+
+           
+            
+            return dtoObj;
           
         }
 

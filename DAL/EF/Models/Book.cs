@@ -15,7 +15,7 @@ namespace DAL.EF.Models
 
         [Required]
         [StringLength(50)]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required,StringLength(50)]
         public DateTime PublishedDate { get; set; }
@@ -24,7 +24,7 @@ namespace DAL.EF.Models
         public BookType Type { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         public decimal Price { get; set; } = 0;
