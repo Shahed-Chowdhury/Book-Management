@@ -1,6 +1,6 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-50">
-    <div class="mb-5">
-        <h1 class="p-5">Edit Book</h1>
+    <div class="mb-5 inner-edit-container-body">
+        <h1 class="p-5 text-center">Edit Book</h1>
         <form>
 
             <div class="name">
@@ -55,37 +55,19 @@
                     name="authorList"
                     placeholder="Select authors"
                     [(ngModel)]="selectedAuthorIds"
+                    (change)="selectedAuthorFn($event)"
                 >
                     <ng-template ng-option-tmp let-item="item" let-index="index">
                         <b>{{ item.name }}</b>
                     </ng-template>
                 </ng-select>
             </div>
-
-            <!-- <div class="authors mt-3 mb-3">
-                <p>Authors:</p>
-                <div class="author-available"  *ngIf="totalAuthors > 0">
-                    <div class="author shadow"
-                        (mouseover)="authorMouseEnter($event)" (mouseleave)="authorMouseLeave($event)"
-                        *ngFor="let author of authors"
-                        (click)="deleteAuthor(author.id)"
-                    >
-                        <fa-icon [icon]="faCross"></fa-icon>&nbsp;
-                        {{author.name}}
-                    </div>
-                </div>
-                <div class="author shadow"
-                    (mouseover)="authorMouseEnter($event)" 
-                    (mouseleave)="authorMouseLeave($event)"
-                    (click)="addAuthor()"
-                >
-                    <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
-                    Add author
-                </div>
-            </div> -->
             <div class="button">
                 <br>
-                <button class="btn btn-primary w-100 p-2" (click)="editBook()">Update Book</button>
+                <button class="btn btn-primary w-100 p-2" (click)="editBook()">
+                    <div *ngIf="spinner == false">Update Book</div>
+                    <div *ngIf="spinner == true" ><app-spinner [spinner]="spinner"></app-spinner></div>
+                </button>
             </div>
         </form>
     </div>

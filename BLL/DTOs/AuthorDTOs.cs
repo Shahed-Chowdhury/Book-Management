@@ -31,6 +31,13 @@ namespace BLL.DTOs
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public DateTime DOB { get; set; }
+
+        public string? shortBio { get; set; }
+
+        public int? BookId { get; set; }
     }
 
     public class AuthorDTO3

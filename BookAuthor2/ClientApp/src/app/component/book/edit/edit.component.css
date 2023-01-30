@@ -5,3 +5,7 @@
  border: 1px solid #000;
  cursor: pointer;
 }
+
+.inner-edit-container-body {
+    width: 40%;
+}

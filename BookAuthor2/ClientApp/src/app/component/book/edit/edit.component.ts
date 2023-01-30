@@ -20,6 +20,7 @@ export class EditComponent implements OnInit {
   faCross = faTrash;
   faPlus = faPlusCircle;
   bookDetails: any
+  spinner: boolean = false
 
   // ----------------------- Form input
   title!: string
@@ -32,6 +33,7 @@ export class EditComponent implements OnInit {
   totalAuthors!: number
   allAuthors!: any
   selectedAuthorIds: Array<string> = []
+  selectedAuthors: Array<object> = []
 
   constructor(private apiservice: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -56,8 +58,11 @@ export class EditComponent implements OnInit {
       this.publisherId = this.bookDetails.data.publisher.id
       this.authors = this.bookDetails.data.authors
       this.totalAuthors = this.authors.length   
-      console.log(this.authors);
-      
+      this.selectedAuthors = this.authors
+
+      console.log("authors:", this.authors);
+      console.log("selected authors:", this.selectedAuthors);
+
       var selectedAuthorIdsTemp = []
       for(let i=0; i<this.authors.length; i++)
       {
@@ -74,7 +79,6 @@ export class EditComponent implements OnInit {
     this.apiservice.getAllAuthors().subscribe(res => {
       this.allAuthors = res;
       this.allAuthors = this.allAuthors.data;
-      console.log(this.allAuthors);
     })
   }
 
@@ -88,7 +92,7 @@ export class EditComponent implements OnInit {
 
   editBook()
   {
-    
+    this.spinner = true
     const data = {
       "Id": this.bookId,
       "Title": this.title,
@@ -98,49 +102,62 @@ export class EditComponent implements OnInit {
       "PublisherId": Number(this.publisherId)
     }
 
-    this.apiservice.editBook(data).subscribe(res => {
-      alert("Successfully updated")
-      this.router.navigate(['/books'], {queryParams: {page: 1}})
-    },err => {
-      alert("Error")
-      console.log(err)
-    })
-    
-  }
+    // finds if the selected author has been unselected from the authors list
+    // if none has been removed it returns an empty array
+    var arr = this.authors.filter((el:any) => !this.selectedAuthors.some((el2:any) => el.id === el2.id))
+    console.log("After matching authors selected with authors:", arr);
 
-  authorMouseEnter(event: any)
-  {
-    event.target.style.fontSize = "120%";
-  }
-
-  authorMouseLeave(event: any)
-  {
-    event.target.style.fontSize = "100%";
-  }
-
-  deleteAuthor(authorId: Number)
-  {
-    this.apiservice.deleteAuthor(authorId).subscribe(res => {
-      
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=> {
-        this.router.navigate(['/book/edit', this.bookId])
+    if (arr.length > 0){
+      arr.forEach((el:any)=>{
+        el.bookId = null
+        this.apiservice.editAuthor(el).subscribe(response => {
+          var resp = response
+          console.log(resp);
+        });
       })
+    } 
+    else {
+      this.selectedAuthors.forEach((el:any)=>{
+        el.bookId = this.bookId
+        this.apiservice.editAuthor(el).subscribe(response => {
+          var resp = response
+        });
+      })
+    }
+
+    this.apiservice.editBook(data).subscribe(res => {
+        alert("Successfully updated")
+        this.spinner = false
+        this.router.navigate(['/books'], {queryParams: {page: 1}})
+      },err => {
+        alert("Error")
+        this.spinner = false
+      })
+  }
+
+
+  addAuthor() { this.router.navigate(['/author/add'], {queryParams: {bookId: this.bookId}}) }
+
+  selectedAuthorFn(event: Array<object>) { this.selectedAuthors = event }
+
+  authorMouseLeave(event: any) { event.target.style.fontSize = "100%"; }
+
+  authorMouseEnter(event: any) { event.target.style.fontSize = "120%"; }
+
+    // deleteAuthor(authorId: Number)
+  // {
+  //   this.apiservice.deleteAuthor(authorId).subscribe(res => {
       
-    }, err=> {
-      alert("Unable to delete author");
-      console.log(err)
-    });
-  }
+  //     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=> {
+  //       this.router.navigate(['/book/edit', this.bookId])
+  //     })
+      
+  //   }, err=> {
+  //     alert("Unable to delete author");
+  //     console.log(err)
+  //   });
+  // }
 
-  addAuthor()
-  {
-    this.router.navigate(['/author/add'], {queryParams: {bookId: this.bookId}})
-  }
-
-  compareFn(item:any, selected:any)
-  {
-    console.log(item);
-  }
 }
 
 
