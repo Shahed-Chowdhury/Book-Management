@@ -28,10 +28,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>{{author.data.book.title}}</td>
-                <td>{{genre[author.data.book.type]}}</td>
-                <td><a [routerLink]="['/book/details', author.data.book.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
+            <tr *ngFor="let a of allBooks">
+                <td>{{a.title}}</td>
+                <td>{{genre[a.type]}}</td>
+                <td><a [routerLink]="['/book/details', a.id]"><fa-icon [icon]="faInfo"></fa-icon></a></td>
             </tr>
         </tbody>
     </table>

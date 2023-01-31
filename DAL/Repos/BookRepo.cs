@@ -57,30 +57,13 @@ namespace DAL.Repos
 
         public Book Get(int id)
         {
-            /*var data = _context.Books.Select(n => new Book
-            {
-               Id = n.Id,
-               PublisherId = n.PublisherId,
-               Title = n.Title,
-               Type = n.Type,
-               PublishedDate = n.PublishedDate,
-               Publisher = n.Publisher,
-               Description = n.Description,
-               Price = n.Price,
-               BookAuthorMaps = n.BookAuthorMaps
-
-            }).FirstOrDefault(p => p.Id == id); */
-
             var data = _context.Books
                 .Include(p => p.Publisher)
                 .Include(x => x.BookAuthorMaps)
                 .ThenInclude(y => y.Author)
                 .SingleOrDefault(b => b.Id == id);
-
-            //data = _context.Books.Include()
           
             return data;
-           
         }
 
         public Book Update(Book c)

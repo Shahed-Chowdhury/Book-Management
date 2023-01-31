@@ -60,4 +60,23 @@ namespace BLL.DTOs
 
     }
 
+    public class AuthorDTO4
+    {
+
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        public int Count { get; set; }
+
+        [Required]
+        public DateTime DOB { get; set; }
+
+        public string? shortBio { get; set; }
+
+        public ICollection<BookDTO4> Books { get; set; }
+
+    }
+
 }

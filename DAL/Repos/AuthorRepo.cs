@@ -1,5 +1,6 @@
 ﻿using DAL.EF.Models;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,18 +44,13 @@ namespace DAL.Repos
 
         public Author Get(int id)
         {
-            //return _context.Authors.Where(x => x.Id == id).FirstOrDefault();
-            var ret =  _context.Authors.Select(a => new Author
-            {
-                Id = a.Id,
-                Name = a.Name,
-                DOB = a.DOB,
-                shortBio = a.shortBio,
-                //BookId = a.BookId,
-                //Book = a.Book,
-            });
 
-            return ret.Where(x=>x.Id == id).FirstOrDefault();
+            var data = _context.Authors
+                .Include(x => x.BookAuthorMaps)
+                .ThenInclude(y => y.Book)
+                .SingleOrDefault(b => b.Id == id);
+
+            return data;
         }
 
         public Author Update(Author c)

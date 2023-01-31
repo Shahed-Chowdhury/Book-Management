@@ -15,6 +15,7 @@ export class AuthorDetailComponent implements OnInit {
   author: any;
   genre: Array<String> = ["Fantasy", "Science", "Horror"];
   faInfo = faInfoCircle;
+  allBooks: any;
 
   constructor(private activatedRoute : ActivatedRoute, private apiservice: ApiService, private router: Router) { }
 
@@ -31,7 +32,11 @@ export class AuthorDetailComponent implements OnInit {
       this.apiservice.getOnlyAuthorsById(authorId).subscribe(result=>{
         this.author=result
         // this.author.data == null ? this.router.navigate(['/authors']) : console.log(this.author.data.books)
-        console.log(this.author);
+        console.log("Author: ", this.author);
+        this.allBooks = this.author.data.books;
+        this.allBooks.forEach((el:any)=>{
+          console.log(el);
+        })
       })   
   }
 }
