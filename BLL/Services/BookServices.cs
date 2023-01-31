@@ -74,23 +74,32 @@ namespace BLL.Services
         {
 
             var book = DataAccessFactory.BookDataAccess().Get(id);
+            BookDTO5 bookDTO = new BookDTO5();
+            ICollection<AuthorDTO2> authorDTO = new List<AuthorDTO2>();
 
-             
-             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Book, BookDTO5>();
-                cfg.CreateMap<Publisher, PublisherDTO2>();
-                cfg.CreateMap<Author, AuthorDTO2>();
-            }); 
-
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Publisher, PublisherDTO2>());
             var mapper = new Mapper(config);
 
-            var dtoObj = mapper.Map<BookDTO5>(book);
+           foreach(var maps in book.BookAuthorMaps)
+           {
+                var dto = new AuthorDTO2();
+                dto.Id = maps.Author.Id;
+                dto.Name = maps.Author.Name;
+                dto.DOB = maps.Author.DOB;
+                dto.shortBio = maps.Author.shortBio;
+                authorDTO.Add(dto);
+           }
 
-            // Fix
-
-           
-            
-            return dtoObj;
+            bookDTO.Id = book.Id;
+            bookDTO.Title = book.Title;
+            bookDTO.Publisher = mapper.Map<PublisherDTO2>(book.Publisher);
+            bookDTO.PublishedDate = book.PublishedDate;
+            bookDTO.Description = book.Description;
+            bookDTO.Type = book.Type;
+            bookDTO.Price = book.Price;
+            bookDTO.Authors = authorDTO;
+    
+            return bookDTO;
           
         }
 

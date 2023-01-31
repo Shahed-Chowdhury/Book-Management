@@ -57,7 +57,7 @@ namespace DAL.Repos
 
         public Book Get(int id)
         {
-            var data = _context.Books.Select(n => new Book
+            /*var data = _context.Books.Select(n => new Book
             {
                Id = n.Id,
                PublisherId = n.PublisherId,
@@ -69,7 +69,15 @@ namespace DAL.Repos
                Price = n.Price,
                BookAuthorMaps = n.BookAuthorMaps
 
-            }).FirstOrDefault(p => p.Id == id);
+            }).FirstOrDefault(p => p.Id == id); */
+
+            var data = _context.Books
+                .Include(p => p.Publisher)
+                .Include(x => x.BookAuthorMaps)
+                .ThenInclude(y => y.Author)
+                .SingleOrDefault(b => b.Id == id);
+
+            //data = _context.Books.Include()
           
             return data;
            
