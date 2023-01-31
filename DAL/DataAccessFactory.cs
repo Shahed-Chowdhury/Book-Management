@@ -30,5 +30,10 @@ namespace DAL
         {
             return new BookAuthorMapRepo();
         }
+
+        public static IBookAuthor BookAuthorMapDataAccessV2()
+        {
+            return new BookAuthorMapRepo();
+        }
     }
 }

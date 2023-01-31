@@ -103,21 +103,14 @@ export class EditComponent implements OnInit {
     // if none has been removed it returns an empty array
     var arr = this.authors.filter((el:any) => !this.selectedAuthors.some((el2:any) => el.id === el2.id))
 
-
     if (arr.length > 0){
       arr.forEach((el:any)=>{
-        el.bookId = null
-        this.apiservice.editAuthor(el).subscribe(response => {
-          var resp = response
-        });
+        this.apiservice.deleteBookAuthor(el.id, this.bookId).subscribe(res=>{})
       })
     } 
     else {
       this.selectedAuthors.forEach((el:any)=>{
-        el.bookId = this.bookId
-        this.apiservice.editAuthor(el).subscribe(response => {
-          var resp = response
-        });
+        this.apiservice.addBookAuthor({"AuthorId": el.id, "BookId": this.bookId}).subscribe(res => {var resp=res})
       })
     }
 

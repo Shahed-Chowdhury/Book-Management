@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repos
 {
-    internal class BookAuthorMapRepo : Repo, IRepo<BookAuthorMap>
+    internal class BookAuthorMapRepo : Repo, IRepo<BookAuthorMap>, IBookAuthor
     {
         public BookAuthorMap Add(BookAuthorMap c)
         {
@@ -19,7 +19,18 @@ namespace DAL.Repos
 
         public BookAuthorMap Delete(int id)
         {
-            throw new NotImplementedException();
+            var map = _context.BookAuthorMaps.Find(id);
+            _context.BookAuthorMaps.Remove(map);
+            if (_context.SaveChanges()>0) { return map; }
+            return null;
+        }
+
+        public bool Delete(int authorId, int bookId)
+        {
+            var map = _context.BookAuthorMaps.Where(x => x.AuthorId == authorId && x.BookId == bookId).FirstOrDefault();
+            _context.BookAuthorMaps.Remove(map);
+            if(_context.SaveChanges() > 0) { return true; }
+            return false;
         }
 
         public List<BookAuthorMap> Get(int page = 1, int pageSize = 10)

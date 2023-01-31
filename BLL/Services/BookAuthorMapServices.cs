@@ -28,5 +28,10 @@ namespace BLL.Services
 
             return mapper.Map<BookAuthorMapDTOs>(dbObj);
         }
+
+        public static bool Delete(int authorId, int bookId)
+        {
+            return DataAccessFactory.BookAuthorMapDataAccessV2().Delete(authorId, bookId);
+        }
     }
 }

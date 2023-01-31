@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
     this.apiService.updatePublisher({Id: this.publisherId, Name: this.publisher}).subscribe(res => {
       this.spinner = false
       alert("Publisher updated successfully")
-      this.router.navigate(['/authors', {queryParams: {page: 1}}])
+      this.router.navigate(['/publishers'], {queryParams: {page: 1}})
     }, err => {
       this.spinner = false
       alert("Unable to update publisher")

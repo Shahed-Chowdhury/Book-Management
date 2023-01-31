@@ -75,6 +75,7 @@ export class ApiService {
 
   // add to book author map
   addBookAuthor(data:any) { return this.httpclient.post(`${this.Api_URL}/bookAuthor`, data, {headers: this.headers})}
-  
 
+  deleteBookAuthor(authorId:Number, bookId:Number){ return this.httpclient.delete(`${this.Api_URL}/bookAuthor/${authorId}/${bookId}`)}
+  
 }

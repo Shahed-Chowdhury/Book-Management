@@ -14,5 +14,21 @@ namespace BookAuthor2.Controllers
         {
             return Ok(new {status="success", data=BookAuthorMapServices.Add(dto)});
         }
+
+        [HttpDelete("{authorId}/{bookId}")]
+        public IActionResult Delete(int authorId, int bookId)
+        {
+            try
+            {
+                BookAuthorMapServices.Delete(authorId, bookId);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
+
+
 }
