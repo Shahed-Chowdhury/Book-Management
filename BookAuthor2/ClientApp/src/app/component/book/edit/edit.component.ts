@@ -60,13 +60,29 @@ export class EditComponent implements OnInit {
       this.totalAuthors = this.authors.length   
       this.selectedAuthors = this.authors
 
+      // var selectedAuthorIdsTemp = []
+      // for(let i=0; i<this.authors.length; i++)
+      // {
+      //   selectedAuthorIdsTemp.push(this.authors[i].id)
+      // }
+
+      // this.selectedAuthorIds = selectedAuthorIdsTemp;
+
       var selectedAuthorIdsTemp = []
+      var emptied: Array<string> = []
+
       for(let i=0; i<this.authors.length; i++)
       {
         selectedAuthorIdsTemp.push(this.authors[i].id)
       }
 
-      this.selectedAuthorIds = selectedAuthorIdsTemp;
+      console.log(selectedAuthorIdsTemp);
+
+      var uniqueIds = new Set(selectedAuthorIdsTemp)
+
+      uniqueIds.forEach(ids => emptied.push(ids))
+
+      this.selectedAuthorIds = emptied;
       
     })
   }
@@ -132,20 +148,6 @@ export class EditComponent implements OnInit {
   authorMouseLeave(event: any) { event.target.style.fontSize = "100%"; }
 
   authorMouseEnter(event: any) { event.target.style.fontSize = "120%"; }
-
-    // deleteAuthor(authorId: Number)
-  // {
-  //   this.apiservice.deleteAuthor(authorId).subscribe(res => {
-      
-  //     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=> {
-  //       this.router.navigate(['/book/edit', this.bookId])
-  //     })
-      
-  //   }, err=> {
-  //     alert("Unable to delete author");
-  //     console.log(err)
-  //   });
-  // }
 
 }
 

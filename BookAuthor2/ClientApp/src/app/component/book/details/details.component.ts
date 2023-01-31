@@ -46,6 +46,8 @@ export class DetailsComponent implements OnInit {
       this.bookPrice = this.book.data.price
       this.bookDescription = this.book.data.description
       this.bookAuthors = this.book.data.authors
+      this.bookAuthors.filter()
+
       this.totalBookAuthors = this.bookAuthors.length
     }, err => {
       console.log(err)
