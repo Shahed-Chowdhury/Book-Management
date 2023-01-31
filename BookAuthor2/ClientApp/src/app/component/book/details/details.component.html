@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="p-5 text-center">{{book.data.title}}</h1>  
+    <h1 class="p-5 text-center">{{bookTitle}}</h1>  
     <div class="row mb-5">
         <div class="col-lg-6">
             <a [routerLink]="['/book/edit', bookId]" class="btn btn-primary w-100 p-3">Edit book</a>
@@ -11,33 +11,33 @@
     <h3 class="p-3 text-center">Details</h3> <hr>
     <p>
         <b>Title: </b>
-        {{book.data.title}}
+        {{bookTitle}}
     </p>
     <p>
         <b>Type:</b>
-        {{genre[book.data.type]}}
+        {{genre[bookGenreType]}}
     </p>
     <p>
         <b>Published date:</b>
-        {{book.data.publishedDate.split("T")[0]}}
+        {{bookPublishedDate}}
     </p>
     <p>
         <b>Publisher: </b>
-        {{book.data.publisher.name}}
+        {{bookPublisherName}}
     </p>
     <p>
         <b>Price: </b>
-        {{book.data.price}}
+        {{bookPrice}}
     </p>
     <p>
         <b>Description: </b>
-        {{book.data.description}}
+        {{bookDescription}}
     </p>
-    <p *ngIf="book.data.authors.length > 0">
+    <p *ngIf="totalBookAuthors > 0">
         <b>Authors: </b>
         <select name="" id="" (change)="GoToAuthorDetails($event)">
             <option value="" disabled selected><b>View authors</b></option>
-            <option *ngFor="let authors of book.data.authors" value={{authors.id}} >
+            <option *ngFor="let authors of bookAuthors" value={{authors.id}} >
                 {{authors.name}}
             </option>
         </select>

@@ -15,6 +15,16 @@ export class DetailsComponent implements OnInit {
   genre: Array<String> = ["Fantasy", "Science", "Horror"];
   faInfo = faInfoCircle;
 
+  // ------------------------------------- Book ----------------------------------------------
+  bookTitle!: string;
+  bookGenreType!: number;
+  bookPublishedDate!: string;
+  bookPublisherName!: string;
+  bookPrice!: number;
+  bookDescription!: string;
+  bookAuthors: any;
+  totalBookAuthors!: number; 
+
   constructor(private apiservice: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -29,7 +39,14 @@ export class DetailsComponent implements OnInit {
   {
     this.apiservice.getBookById(bookId).subscribe(res => {
       this.book = res
-      console.log(this.book)
+      this.bookTitle = this.book.data.title
+      this.bookGenreType = this.book.data.type
+      this.bookPublishedDate = this.book.data.publishedDate.split("T")[0]
+      this.bookPublisherName = this.book.data.publisher.name
+      this.bookPrice = this.book.data.price
+      this.bookDescription = this.book.data.description
+      this.bookAuthors = this.book.data.authors
+      this.totalBookAuthors = this.bookAuthors.length
     }, err => {
       console.log(err)
       this.router.navigate(['/books'])
