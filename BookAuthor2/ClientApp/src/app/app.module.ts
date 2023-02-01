@@ -27,6 +27,7 @@ import { InfoComponent as PublisherDetailComponent } from './component/publisher
 import { EditComponent as PublisherEditComponent } from './component/publisher/edit/edit.component';
 import { DeleteComponent as PublisherDeleteComponent } from './component/publisher/delete/delete.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PublisherDetailComponent,
     PublisherEditComponent,
     PublisherDeleteComponent,
+    ModalComponent,
   ],
 
   imports: [

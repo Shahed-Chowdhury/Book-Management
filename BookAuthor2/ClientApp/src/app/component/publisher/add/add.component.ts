@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ApiService } from './../../../api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +12,7 @@ export class AddComponent implements OnInit {
   publisherName!: string
   spinner: boolean = false
 
-  constructor(private apiservices: ApiService) { }
+  constructor(private apiservices: ApiService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -20,6 +21,7 @@ export class AddComponent implements OnInit {
     this.apiservices.addPublisher({"Name": this.publisherName}).subscribe(res => {
       alert("Successfully added publisher")
       this.spinner = false
+      this.router.navigate(['/publishers'], {queryParams: {page: 1}})
     }, err => {
       alert("Unable to add publisher")
       this.spinner = false

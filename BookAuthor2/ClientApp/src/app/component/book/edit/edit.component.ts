@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faInfoCircle, faPenNib, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class EditComponent implements OnInit {
 
+  @ViewChild('myDiv') myDiv!: ElementRef;
+  
   genre: any = environment.bookGenres;
   book: any
   bookId!: Number 
@@ -34,6 +36,10 @@ export class EditComponent implements OnInit {
   allAuthors!: any
   selectedAuthorIds: Array<string> = []
   selectedAuthors: Array<object> = []
+
+  // ----------------------- Modal
+  entity!: string
+  route!: string
 
   constructor(private apiservice: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -76,7 +82,6 @@ export class EditComponent implements OnInit {
         selectedAuthorIdsTemp.push(this.authors[i].id)
       }
 
-      console.log(selectedAuthorIdsTemp);
 
       var uniqueIds = new Set(selectedAuthorIdsTemp)
 
@@ -105,6 +110,8 @@ export class EditComponent implements OnInit {
 
   editBook()
   {
+
+    
     this.spinner = true
     const data = {
       "Id": this.bookId,
@@ -131,11 +138,13 @@ export class EditComponent implements OnInit {
     }
 
     this.apiservice.editBook(data).subscribe(res => {
-        alert("Successfully updated")
         this.spinner = false
-        this.router.navigate(['/books'], {queryParams: {page: 1}})
+        this.entity = "Book updated successfully"
+        this.route = '/books'
+        this.modalTrigger()
+        // this.router.navigate(['/books'], {queryParams: {page: 1}})
       },err => {
-        alert("Error")
+        this.entity = "Book update failed"
         this.spinner = false
       })
   }
@@ -148,6 +157,14 @@ export class EditComponent implements OnInit {
   authorMouseLeave(event: any) { event.target.style.fontSize = "100%"; }
 
   authorMouseEnter(event: any) { event.target.style.fontSize = "120%"; }
+
+  modalTrigger(){
+    
+    let element: HTMLElement = document.querySelector('.modal-trigger-btn') as HTMLElement;
+    element.click();
+    // console.log(document.querySelector('.modal-trigger-btn') as HTMLElement);
+  }
+
 
 }
 
