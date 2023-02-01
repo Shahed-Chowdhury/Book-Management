@@ -12,7 +12,22 @@ namespace BookAuthor2.Controllers
         [HttpPost]
         public IActionResult Add(BookAuthorMapDTOs dto)
         {
-            return Ok(new {status="success", data=BookAuthorMapServices.Add(dto)});
+
+            try
+            {
+                var data = BookAuthorMapServices.Add(dto);
+
+                if (data == null)
+                {
+                    throw new Exception("Failed to add value");
+                }
+
+                return Ok(new { status = "success", data = data });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { status = "Failed", message = ex.Message });
+            }
         }
 
         [HttpDelete("{authorId}/{bookId}")]
@@ -25,10 +40,8 @@ namespace BookAuthor2.Controllers
             }
             catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(new { status = "Failed", message = ex.Message });
             }
         }
     }
-
-
 }

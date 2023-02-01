@@ -14,7 +14,15 @@ namespace BookAuthor2.Controllers
         {
             try
             {
-                return Ok(new { status = "success", data = BookServices.Add(dto) });
+
+                var data = BookServices.Add(dto);
+
+                if(data==null)
+                {
+                    throw new Exception("Failed to add value");
+                }
+
+                return Ok(new { status = "success", data=data });
             }
             catch (Exception ex)
             {

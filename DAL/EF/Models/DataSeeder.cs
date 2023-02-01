@@ -26,7 +26,7 @@ namespace DAL.EF.Models
                 for(int i = 0; i < 100; i++)
                 {
                     var publisher = new Publisher();
-                    publisher.Name = "test" + i;
+                    publisher.Name = "publisher" + i;
                     publishers.Add(publisher);
                 }
                 bookManagementContext.Publishers.AddRange(publishers);
@@ -66,7 +66,7 @@ namespace DAL.EF.Models
                 }
 
                 bookManagementContext.Authors.AddRange(authors);
-            }
+            } /**/
 
             bookManagementContext.SaveChanges();
         }

@@ -41,6 +41,11 @@ namespace DAL.DataContext
         public DbSet<Author> Authors { get; set; }
         public DbSet<BookAuthorMap> BookAuthorMaps { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BookAuthorMap>().HasKey(bam => new { bam.AuthorId, bam.BookId });
+        }
+
         
     }
 }

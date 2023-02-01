@@ -12,9 +12,17 @@ namespace DAL.Repos
     {
         public BookAuthorMap Add(BookAuthorMap c)
         {
-            _context.BookAuthorMaps.Add(c);
-            if(_context.SaveChanges()>0) { return c; }
-            return null;
+            try
+            {
+                _context.BookAuthorMaps.Add(c);
+                _context.SaveChanges();
+                return c;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public BookAuthorMap Delete(int id)

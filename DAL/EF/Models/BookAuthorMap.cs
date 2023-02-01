@@ -20,5 +20,6 @@ namespace DAL.EF.Models
         [Required, ForeignKey("Book")]
         public int BookId { get; set; }
         public Book Book { get; set; }
+
     }
 }

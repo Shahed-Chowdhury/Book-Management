@@ -67,14 +67,13 @@ namespace DAL.Migrations
                 name: "BookAuthorMaps",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
-                    BookId = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookAuthorMaps", x => x.Id);
+                    table.PrimaryKey("PK_BookAuthorMaps", x => new { x.AuthorId, x.BookId });
                     table.ForeignKey(
                         name: "FK_BookAuthorMaps_Authors_AuthorId",
                         column: x => x.AuthorId,
@@ -88,11 +87,6 @@ namespace DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookAuthorMaps_AuthorId",
-                table: "BookAuthorMaps",
-                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookAuthorMaps_BookId",

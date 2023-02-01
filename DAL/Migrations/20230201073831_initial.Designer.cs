@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(BookManagementContext))]
-    [Migration("20230130111811_initial")]
+    [Migration("20230201073831_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -87,21 +87,16 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.EF.Models.BookAuthorMap", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AuthorId");
+                    b.HasKey("AuthorId", "BookId");
 
                     b.HasIndex("BookId");
 
