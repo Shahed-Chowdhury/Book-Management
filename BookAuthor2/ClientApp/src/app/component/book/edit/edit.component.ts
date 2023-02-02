@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/api.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { faInfoCircle, faPenNib, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environment';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-edit',
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EditComponent implements OnInit {
 
-  @ViewChild('myDiv') myDiv!: ElementRef;
+  @ViewChild(ModalComponent) modal!: ModalComponent;
   
   genre: any = environment.bookGenres;
   book: any
@@ -66,14 +67,6 @@ export class EditComponent implements OnInit {
       this.totalAuthors = this.authors.length   
       this.selectedAuthors = this.authors
 
-      // var selectedAuthorIdsTemp = []
-      // for(let i=0; i<this.authors.length; i++)
-      // {
-      //   selectedAuthorIdsTemp.push(this.authors[i].id)
-      // }
-
-      // this.selectedAuthorIds = selectedAuthorIdsTemp;
-
       var selectedAuthorIdsTemp = []
       var emptied: Array<string> = []
 
@@ -109,10 +102,9 @@ export class EditComponent implements OnInit {
   }
 
   editBook()
-  {
-
-    
+  {    
     this.spinner = true
+
     const data = {
       "Id": this.bookId,
       "Title": this.title,
@@ -122,32 +114,46 @@ export class EditComponent implements OnInit {
       "PublisherId": Number(this.publisherId)
     }
 
-    // finds if the selected author has been unselected from the authors list
-    // if none has been removed it returns an empty array
-    var arr = this.authors.filter((el:any) => !this.selectedAuthors.some((el2:any) => el.id === el2.id))
+    this.apiservice.editBook(data).subscribe(res => {
+      this.editAuthorSelected()
 
-    if (arr.length > 0){
+      this.spinner = false
+      this.entity = "Book updated successfully"
+      this.route = '/books'
+      this.modal.modalTrigger()
+    }, err => {
+      this.entity = "Book update failed"
+      this.route = '/books'
+      this.modal.modalTrigger()
+      this.spinner = false
+    })
+  }
+
+
+  editAuthorSelected(){
+
+    var arr = this.authors.filter((el:any) => !this.selectedAuthors.some((el2:any) => el.id === el2.id)) // array to be removed
+    var arr2 = this.selectedAuthors
+
+    if(arr.length > 0)
+    {
       arr.forEach((el:any)=>{
-        this.apiservice.deleteBookAuthor(el.id, this.bookId).subscribe(res=>{})
-      })
-    } 
-    else {
-      this.selectedAuthors.forEach((el:any)=>{
-        this.apiservice.addBookAuthor({"AuthorId": el.id, "BookId": this.bookId}).subscribe(res => {var resp=res})
+          this.apiservice.deleteBookAuthor(el.id, this.bookId).subscribe(res=>{ }, err => {
+            // this.entity = "Book update failed"
+            // this.route = '/books'
+            // this.modal.modalTrigger()
+            // this.spinner = false
+          })
       })
     }
 
-    this.apiservice.editBook(data).subscribe(res => {
-        this.spinner = false
-        this.entity = "Book updated successfully"
-        this.route = '/books'
-        this.modalTrigger()
-        // this.router.navigate(['/books'], {queryParams: {page: 1}})
-      },err => {
-        this.entity = "Book update failed"
-        this.spinner = false
-      })
+    arr2.forEach((el:any)=>{
+      this.apiservice.addBookAuthor({"AuthorId": el.id, "BookId": this.bookId}).subscribe(res=>{
+        console.log("During add");
+      }, err =>{})
+    })      
   }
+
 
 
   addAuthor() { this.router.navigate(['/author/add'], {queryParams: {bookId: this.bookId}}) }
@@ -157,15 +163,6 @@ export class EditComponent implements OnInit {
   authorMouseLeave(event: any) { event.target.style.fontSize = "100%"; }
 
   authorMouseEnter(event: any) { event.target.style.fontSize = "120%"; }
-
-  modalTrigger(){
-    
-    let element: HTMLElement = document.querySelector('.modal-trigger-btn') as HTMLElement;
-    element.click();
-    // console.log(document.querySelector('.modal-trigger-btn') as HTMLElement);
-  }
-
-
 }
 
 

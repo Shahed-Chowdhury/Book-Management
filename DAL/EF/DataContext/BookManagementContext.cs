@@ -45,7 +45,5 @@ namespace DAL.DataContext
         {
             modelBuilder.Entity<BookAuthorMap>().HasKey(bam => new { bam.AuthorId, bam.BookId });
         }
-
-        
     }
 }

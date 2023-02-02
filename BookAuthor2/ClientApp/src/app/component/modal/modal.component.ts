@@ -15,5 +15,9 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  modalTrigger(){
+    let element: HTMLElement = document.querySelector('.modal-trigger-btn') as HTMLElement;
+    element.click();
+  }
 
 }

@@ -36,7 +36,7 @@ namespace BookAuthor2.Controllers
             try
             {
                 BookAuthorMapServices.Delete(authorId, bookId);
-                return NoContent();
+                return Ok(new {status = "Success"});
             }
             catch(Exception ex)
             {
