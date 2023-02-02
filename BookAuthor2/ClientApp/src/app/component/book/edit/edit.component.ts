@@ -149,7 +149,6 @@ export class EditComponent implements OnInit {
 
     arr2.forEach((el:any)=>{
       this.apiservice.addBookAuthor({"AuthorId": el.id, "BookId": this.bookId}).subscribe(res=>{
-        console.log("During add");
       }, err =>{})
     })      
   }

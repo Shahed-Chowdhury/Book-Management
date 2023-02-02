@@ -1,7 +1,8 @@
 import { ApiService } from 'src/app/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-add',
@@ -9,6 +10,8 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+
+  @ViewChild(ModalComponent) modal!: ModalComponent;
 
   genre: Array<String> = ["Fantasy", "Science", "Horror"];
   authors: any
@@ -21,6 +24,10 @@ export class AddComponent implements OnInit {
   publishers: any
   publisherId: number = 0
   selectedAuthor!: Array<any>
+
+  // ----------------------- Modal
+  entity!: string
+  route!: string
 
   constructor(private apiservice: ApiService, private router: Router) { }
 
@@ -55,18 +62,24 @@ export class AddComponent implements OnInit {
       "PublisherId": Number(this.publisherId)
     }
 
+    
+    
     this.apiservice.addBook(data).subscribe(res => {
-      var resp:any = res
-      var bookId = resp.data.id
-      this.selectedAuthor.forEach((author:any)=>{
-        var authorId = author.id 
-        this.apiservice.addBookAuthor({"AuthorId": authorId, "BookId": bookId}).subscribe(res => {
-          this.router.navigate(["/books"], {queryParams: {page: 1}})
-        })
-      })    
+
+      var book:any = res
+      var bookId = book.data.id
+      this.selectedAuthor.forEach((el:any)=>{
+        this.apiservice.addBookAuthor({"AuthorId": el.id, "BookId": bookId}).subscribe(res=>{
+          this.entity = "Book saved"
+          this.route = '/books'
+          this.modal.modalTrigger()
+        }, err =>{})
+      })
     },
     err => {
-      alert("Unable to add book"); console.log(err)
+      this.entity = "Unable to save book"
+      this.route = '/books'
+      this.modal.modalTrigger()
     })
   }
 
