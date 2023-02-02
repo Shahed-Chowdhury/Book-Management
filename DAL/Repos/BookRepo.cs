@@ -27,10 +27,13 @@ namespace DAL.Repos
 
         public Book Delete(int id)
         {
-            var book = _context.Books.Find(id);
+            // var book = _context.Books.Find(id);
 
-            if (book == null) return null;
-
+            //if (book == null) return null;
+            var book = new Book()
+            {
+                Id = id
+            };
             _context.Books.Remove(book);
 
             if (_context.SaveChanges() > 0) return book;
